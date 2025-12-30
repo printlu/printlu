@@ -26,7 +26,174 @@
 	<link
 		href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
 		rel="stylesheet">
+<style>
+    /* Import czcionki */
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
+    /* Kontener stopki */
+    .custom-footer {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #DBCBB8; /* Twój kolor: Kawa z mlekiem */
+        color: #4a3f35;
+        padding: 3rem 1rem 1.5rem 1rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Układ kolumn */
+    .footer-grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 3rem;
+    }
+
+    @media (min-width: 768px) {
+        .footer-grid {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    /* Sekcja Logo */
+    .footer-logo-section {
+        max-width: 300px;
+    }
+
+    .footer-logo-img {
+        max-height: 50px;
+        width: auto;
+        margin-bottom: 1.25rem;
+    }
+
+    .footer-description {
+        font-size: 0.8rem;
+        line-height: 1.6;
+        color: rgba(74, 63, 53, 0.8);
+        font-weight: 500;
+    }
+
+    /* Grupa Nawigacja + Kontakt */
+    .footer-info-group {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    @media (min-width: 640px) {
+        .footer-info-group {
+            flex-direction: row;
+            gap: 5rem;
+        }
+    }
+
+    /* Nagłówki kolumn */
+    .footer-title {
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: rgba(74, 63, 53, 0.6);
+        margin-bottom: 1.25rem;
+    }
+
+    /* Linki menu */
+    .footer-nav-link {
+        display: block;
+        color: #4a3f35;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+        transition: all 0.2s ease;
+    }
+
+    .footer-nav-link:hover {
+        transform: translateX(4px);
+        color: #ffffff;
+    }
+
+    /* Elementy kontaktu */
+    .footer-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #4a3f35;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+    }
+
+    /* Ikony Social Media */
+    .footer-social-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 1.25rem;
+    }
+
+    .footer-social-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.4);
+        color: #4a3f35;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-social-btn:hover {
+        transform: translateY(-4px);
+        background: white;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+    }
+
+    .fb:hover { color: #1877f2; }
+    .ig:hover { color: #e4405f; }
+    .yt:hover { color: #ff0000; }
+
+    /* Dolny pasek (Prawa autorskie) */
+    .footer-bottom {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(0,0,0,0.08);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        font-size: 11px;
+        font-weight: 600;
+        color: rgba(74, 63, 53, 0.5);
+    }
+
+    @media (min-width: 640px) {
+        .footer-bottom {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    .footer-legal-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .footer-legal-links a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.2s;
+    }
+
+    .footer-legal-links a:hover {
+        color: #ffffff;
+    }
 </head>
 
 <body>
@@ -540,71 +707,124 @@
 			</div>
 		</div>
 	</section>
+<script>
+    function easeOutQuint(x) {
+        return 1 - Math.pow(1 - x, 5);
+    }
 
-	<footer id="footer" class="padding-large bg-primary">
-		<div class="container-lg text-white">
-			<div class="row">
-				<div class="footer-menu col-md-4">
-					<div class="footer-intro">
-						<a href="#" class="logo"><img src="images/logo-light.png"></a>
-					</div>
-					<div class="footer-address mt-4">
-						<p>Just feel free to contact if you wanna collaborate with me, or simply have a conversation.
-						</p>
-						<div class="mail-address">
-							<a href="#" class="text-white fs-3 text-decoration-underline">contact@yourcompany.com</a>
-						</div>
-					</div>
-				</div>
+    const animateValue = (obj, start, end, duration) => {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const easedProgress = easeOutQuint(progress);
+            const currentValue = Math.floor(easedProgress * (end - start) + start);
+            obj.innerHTML = currentValue;
+            
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                obj.innerHTML = end;
+            }
+        };
+        window.requestAnimationFrame(step);
+    };
 
-				<div class="footer-menu col-6 col-md-2">
-					<ul class="list-unstyled">
-						<li><a href="#" class="text-white">Home</a></li>
-						<li><a href="#" class="text-white">About</a></li>
-						<li><a href="#" class="text-white">Portfolio</a></li>
-						<li><a href="#" class="text-white">Services</a></li>
-						<li><a href="#" class="text-white">Contact</a></li>
-					</ul>
-				</div>
+    const startAnimation = () => {
+        const items = document.querySelectorAll('.printo-counter-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('visible');
+                const numSpan = item.querySelector('.pure-number');
+                const target = parseInt(numSpan.getAttribute('data-target'));
+                animateValue(numSpan, 0, target, 3000);
+            }, index * 200);
+        });
+    };
 
-				<div class="footer-menu col-6 col-md-2">
-					<ul class="list-unstyled">
-						<li><a href="#" class="text-white">Privacy Policy</a></li>
-						<li><a href="#" class="text-white">Our Team</a></li>
-						<li><a href="#" class="text-white">Pricing</a></li>
-						<li><a href="#" class="text-white">Terms and Conditions</a></li>
-					</ul>
-				</div>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startAnimation();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.4 });
 
-				<div class="footer-menu col-md-4">
-					<div class="subscribe">
-						<p>Subscribe to newsletter to get some updates related with branding, designs and more.</p>
-						<input class="rounded-2" type="text" name="email" placeholder="Write Your Email Address">
-						<button class="btn btn-dark">Subscribe</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+    const targetSection = document.getElementById('countersGrid');
+    if (targetSection) {
+        observer.observe(targetSection);
+    }
+</script>
+<footer class="custom-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            
+            <!-- KOLUMNA 1: LOGO I OPIS -->
+            <div class="footer-logo-section">
+                <!-- MIEJSCE NA TWOJE LOGO -->
+                <img src="images/printlu (1).png" 
+              
+					<p class="footer-description">
+                   
+                </p>
+            </div>
 
-	<div id="footer-bottom" class="py-3 bg-primary border-top">
-		<div class="container-lg text-white">
-			<div class="row align-items-center">
-				<div class="col-md-6">
-					<div class="social-links">
-						<ul class="justify-content-center justify-content-md-start m-0">
-							<li><a href="#"><i class="icon fs-5 icon-facebook"></i></a></li>
-							<li><a href="#"><i class="icon fs-5 icon-twitter"></i></a></li>
-							<li><a href="#"><i class="icon fs-5 icon-behance-square"></i></a></li>
-							<li><a href="#"><i class="icon fs-5 icon-youtube-play"></i></a></li>
-							<li><a href="#"><i class="icon fs-5 icon-pinterest-p"></i></a></li>
-						</ul>
-					</div>
-				</div>
+            <!-- GRUPA KONTAKT + MENU -->
+            <div class="footer-info-group">
+                
+                <!-- KOLUMNA 2: MENU -->
+                <div>
+                    <h3 class="footer-title">Menu</h3>
+                    <nav>
+                        <a href="https://fluxstudio1.github.io/sklep/" class="footer-nav-link">Strona Główna</a>
+                        <a href="https://fluxstudio1.github.io/sklep/Kontakt.html" class="footer-nav-link">Kontakt</a>
+                        <a href="https://fluxstudio1.github.io/sklep/Galeria.html" class="footer-nav-link">Galeria</a>
+                    </nav>
+                </div>
+
+                <!-- KOLUMNA 3: KONTAKT I SOCIALS -->
+                <div>
+                    <h3 class="footer-title">Kontakt</h3>
+                    <div class="footer-contact-list">
+                        <a href="mailto:kontakt@twojadomena.pl" class="footer-contact-item">
+                            <i data-lucide="mail" style="width: 16px; height: 16px; opacity: 0.7;"></i>
+                            <span>kontakt@twojadomena.pl</span>
+                        </a>
+                        <a href="tel:+48799288320" class="footer-contact-item">
+                            <i data-lucide="phone" style="width: 16px; height: 16px; opacity: 0.7;"></i>
+                            <span>+48 799 288 320</span>
+                        </a>
+                    </div>
+
+                    <div class="footer-social-row">
+                        <a href="#" class="footer-social-btn fb" title="Facebook">
+                            <i data-lucide="facebook" style="width: 18px; height: 18px;"></i>
+                        </a>
+                        <a href="#" class="footer-social-btn ig" title="Instagram">
+                            <i data-lucide="instagram" style="width: 18px; height: 18px;"></i>
+                        </a>
+                        <a href="#" class="footer-social-btn yt" title="YouTube">
+                            <i data-lucide="youtube" style="width: 18px; height: 18px;"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- DOLNY PASEK -->
+        <div class="footer-bottom">
+            <div>&copy; 2025 Printlu. WSZYSTKIE PRAWA ZASTRZEŻONE.</div>
+            <div class="footer-legal-links">
+                <a href="#">POLITYKA PRYWATNOŚCI</a>
+                <a href="#">REGULAMIN</a>
+            </div>
+        </div>
+    </div>
+</footer>
 				<div class="col-md-6 text-center text-md-end">
 					<div class="copyright">
-						<p class="m-0">HTML Template by: <a href="https://templatesjungle.com" target="_blank"
-								class="text-decoration-underline fw-bold text-white">TemplatesJungle</a></p>
 					</div>
 				</div>
 			</div>
@@ -623,5 +843,6 @@
 
 
 </html>
+
 
 
