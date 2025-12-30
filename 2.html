@@ -510,36 +510,121 @@
 		</div>
 	</section>
 
-	<section id="features" class="padding-large pt-0">
-		<div class="container-lg" data-aos="zoom-in-up" data-aos-delay="300">
-			<div class="row">
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">12</h3>
-						<p class="text-uppercase">Years of experience</p>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">320+</h3>
-						<p class="text-uppercase">satisfied clients</p>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">55</h3>
-						<p class="text-uppercase">employees worldwide</p>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">220+</h3>
-						<p class="text-uppercase">projects completed</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<style>
+    .printo-counters-wrapper {
+        width: 100%;
+        padding: 80px 0;
+        background: transparent;
+        font-family: 'Bebas Neue', sans-serif;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .printo-counters-grid {
+        display: flex;
+        justify-content: center;
+        gap: 120px;
+        width: 95%;
+        max-width: 1200px;
+        flex-wrap: wrap;
+    }
+
+    .printo-counter-item {
+        text-align: center;
+        flex: 1;
+        min-width: 250px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .printo-counter-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .printo-number-box {
+        font-size: 110px;
+        font-weight: 400;
+        color: #1a1a1a;
+        margin-bottom: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Centrowanie pionowe zawartości (liczba i plus) */
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+    .printo-plus {
+        color: #1a1a1a; /* W pełni czarny */
+        margin-left: 8px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 55px;
+        font-weight: 700;
+        display: inline-block;
+        line-height: 1;
+        /* Korekta optyczna, aby plus był idealnie w środku wysokości Bebas Neue */
+        transform: translateY(-4px); 
+    }
+
+    .printo-label {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #b0b0b0;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-top: 10px;
+    }
+
+    /* RWD */
+    @media (max-width: 1024px) {
+        .printo-counters-grid { gap: 60px; }
+        .printo-number-box { font-size: 85px; }
+        .printo-plus { font-size: 40px; transform: translateY(-2px); }
+    }
+
+    @media (max-width: 768px) {
+        .printo-counters-grid { gap: 40px; }
+        .printo-number-box { font-size: 70px; }
+        .printo-plus { font-size: 35px; transform: translateY(-2px); }
+        .printo-label { font-size: 12px; }
+    }
+</style>
+
+<div class="printo-counters-wrapper">
+    <div class="printo-counters-grid" id="countersGrid">
+        
+        <!-- Licznik 1 -->
+        <div class="printo-counter-item">
+            <div class="printo-number-box">
+                <span class="pure-number" data-target="2">0</span>
+                <span class="printo-plus">+</span>
+            </div>
+            <div class="printo-label">Lata Doświadczenia</div>
+        </div>
+
+        <!-- Licznik 2 -->
+        <div class="printo-counter-item">
+            <div class="printo-number-box">
+                <span class="pure-number" data-target="100">0</span>
+                <span class="printo-plus">+</span>
+            </div>
+            <div class="printo-label">Zadowolonych Klientów</div>
+        </div>
+
+        <!-- Licznik 3 -->
+        <div class="printo-counter-item">
+            <div class="printo-number-box">
+                <span class="pure-number" data-target="300">0</span>
+                <span class="printo-plus">+</span>
+            </div>
+            <div class="printo-label">Projektów 3D</div>
+        </div>
+
+    </div>
+</div>
 
 <!-- 
     WAŻNE: Aby ikonki działały, wklej poniższą linię do sekcji <head> swojego pliku index.html:
