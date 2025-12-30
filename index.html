@@ -676,85 +676,7 @@
 			</div>
 		</div>
 	</section>
-
-	<section id="features" class="padding-large pt-0">
-		<div class="container-lg" data-aos="zoom-in-up" data-aos-delay="300">
-			<div class="row">
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">12</h3>
-						<p class="text-uppercase">Years of experience</p>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">320+</h3>
-						<p class="text-uppercase">satisfied clients</p>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">55</h3>
-						<p class="text-uppercase">employees worldwide</p>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">220+</h3>
-						<p class="text-uppercase">projects completed</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-<script>
-    function easeOutQuint(x) {
-        return 1 - Math.pow(1 - x, 5);
-    }
-
-    const animateValue = (obj, start, end, duration) => {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            const easedProgress = easeOutQuint(progress);
-            const currentValue = Math.floor(easedProgress * (end - start) + start);
-            obj.innerHTML = currentValue;
-            
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            } else {
-                obj.innerHTML = end;
-            }
-        };
-        window.requestAnimationFrame(step);
-    };
-
-    const startAnimation = () => {
-        const items = document.querySelectorAll('.printo-counter-item');
-        items.forEach((item, index) => {
-            setTimeout(() => {
-                item.classList.add('visible');
-                const numSpan = item.querySelector('.pure-number');
-                const target = parseInt(numSpan.getAttribute('data-target'));
-                animateValue(numSpan, 0, target, 3000);
-            }, index * 200);
-        });
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                startAnimation();
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.4 });
-
-    const targetSection = document.getElementById('countersGrid');
-    if (targetSection) {
-        observer.observe(targetSection);
-    }
+	
 </script>
 <footer class="custom-footer">
     <div class="footer-container">
@@ -777,9 +699,9 @@
                 <div>
                     <h3 class="footer-title">Menu</h3>
                     <nav>
-                        <a href="https://fluxstudio1.github.io/sklep/" class="footer-nav-link">Strona Główna</a>
-                        <a href="https://fluxstudio1.github.io/sklep/Kontakt.html" class="footer-nav-link">Kontakt</a>
-                        <a href="https://fluxstudio1.github.io/sklep/Galeria.html" class="footer-nav-link">Galeria</a>
+                        <a href="#" class="footer-nav-link">Strona Główna</a>
+                        <a href="#" class="footer-nav-link">Kontakt</a>
+                        <a href="#" class="footer-nav-link">Galeria</a>
                     </nav>
                 </div>
 
@@ -843,6 +765,7 @@
 
 
 </html>
+
 
 
 
