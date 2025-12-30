@@ -27,6 +27,61 @@
 		href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
 		rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licznik Statystyk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import czcionki o odpowiednich wagach dla balansu */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+        /* Ulepszony styl dla efektu wlatywania z lekkim skalowaniem */
+        .stat-card {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); /* Custom easing */
+        }
+
+        .stat-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Ulepszona typografia liczb */
+        .counter-font {
+            font-weight: 300;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        /* Styl dla symbolu plus */
+        .plus-symbol {
+            font-weight: 300;
+            margin-right: 2px;
+        }
+
+        /* Dopracowany styl napisów pod liczbami */
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #6b7280;
+            font-weight: 500;
+            margin-top: 0.75rem;
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            .stat-label {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -510,125 +565,95 @@
 		</div>
 	</section>
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
-	<style>
-    .printo-counters-wrapper {
-        width: 100%;
-        padding: 80px 0;
-        background: transparent;
-        font-family: 'Bebas Neue', sans-serif;
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-    }
+ <!-- SEKCJA STATYSTYK -->
+    <section id="stats-section" class="py-20 bg-white overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-16 md:gap-32">
+                
+                <!-- Statystyka 1 -->
+                <div class="stat-card flex flex-col items-center text-center">
+                    <div class="text-7xl counter-font text-black flex items-center leading-none">
+                        <span class="plus-symbol">+</span><span class="counter" data-target="2">0</span>
+                    </div>
+                    <span class="stat-label">Lata doświadczenia</span>
+                </div>
 
-    .printo-counters-grid {
-        display: flex;
-        justify-content: center;
-        gap: 120px;
-        width: 95%;
-        max-width: 1200px;
-        flex-wrap: wrap;
-    }
+                <!-- Statystyka 2 -->
+                <div class="stat-card flex flex-col items-center text-center">
+                    <div class="text-7xl counter-font text-black flex items-center leading-none">
+                        <span class="plus-symbol">+</span><span class="counter" data-target="300">0</span>
+                    </div>
+                    <span class="stat-label">Projektów 3D</span>
+                </div>
 
-    .printo-counter-item {
-        text-align: center;
-        flex: 1;
-        min-width: 250px;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+                <!-- Statystyka 3 -->
+                <div class="stat-card flex flex-col items-center text-center">
+                    <div class="text-7xl counter-font text-black flex items-center leading-none">
+                        <span class="plus-symbol">+</span><span class="counter" data-target="100">0</span>
+                    </div>
+                    <span class="stat-label">Zadowolonych klientów</span>
+                </div>
 
-    .printo-counter-item.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .printo-number-box {
-        font-size: 110px;
-        font-weight: 400;
-        color: #1a1a1a;
-        margin-bottom: 0px;
-        display: flex;
-        justify-content: center;
-        align-items: center; /* Centrowanie pionowe zawartości (liczba i plus) */
-        line-height: 1;
-        letter-spacing: 1px;
-    }
-
-    .printo-plus {
-        color: #1a1a1a; /* W pełni czarny */
-        margin-left: 8px;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 55px;
-        font-weight: 700;
-        display: inline-block;
-        line-height: 1;
-        /* Korekta optyczna, aby plus był idealnie w środku wysokości Bebas Neue */
-        transform: translateY(-4px); 
-    }
-
-    .printo-label {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        color: #b0b0b0;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-top: 10px;
-    }
-
-    /* RWD */
-    @media (max-width: 1024px) {
-        .printo-counters-grid { gap: 60px; }
-        .printo-number-box { font-size: 85px; }
-        .printo-plus { font-size: 40px; transform: translateY(-2px); }
-    }
-
-    @media (max-width: 768px) {
-        .printo-counters-grid { gap: 40px; }
-        .printo-number-box { font-size: 70px; }
-        .printo-plus { font-size: 35px; transform: translateY(-2px); }
-        .printo-label { font-size: 12px; }
-    }
-</style>
-
-<div class="printo-counters-wrapper">
-    <div class="printo-counters-grid" id="countersGrid">
-        
-        <!-- Licznik 1 -->
-        <div class="printo-counter-item">
-            <div class="printo-number-box">
-                <span class="pure-number" data-target="2">0</span>
-                <span class="printo-plus">+</span>
             </div>
-            <div class="printo-label">Lata Doświadczenia</div>
         </div>
+    </section>
 
-        <!-- Licznik 2 -->
-        <div class="printo-counter-item">
-            <div class="printo-number-box">
-                <span class="pure-number" data-target="100">0</span>
-                <span class="printo-plus">+</span>
-            </div>
-            <div class="printo-label">Zadowolonych Klientów</div>
-        </div>
+    <div class="h-screen"></div>
 
-        <!-- Licznik 3 -->
-        <div class="printo-counter-item">
-            <div class="printo-number-box">
-                <span class="pure-number" data-target="300">0</span>
-                <span class="printo-plus">+</span>
-            </div>
-            <div class="printo-label">Projektów 3D</div>
-        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsSection = document.getElementById('stats-section');
+            const counters = document.querySelectorAll('.counter');
+            const cards = document.querySelectorAll('.stat-card');
+            let animated = false;
 
-    </div>
-</div>
+            // Funkcja płynnego liczenia z efektem easeOutExpo
+            const easeOutExpo = (t) => {
+                return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+            };
 
+            const animateValue = (obj, start, end, duration) => {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const easedProgress = easeOutExpo(progress);
+                    obj.innerHTML = Math.floor(easedProgress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        obj.innerHTML = end;
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animated) {
+                        // Animacja kart z lekkim opóźnieniem (stagger)
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('visible');
+                            }, index * 150);
+                        });
+
+                        // Animacja samych liczb
+                        setTimeout(() => {
+                            counters.forEach(counter => {
+                                const target = +counter.getAttribute('data-target');
+                                animateValue(counter, 0, target, 2500); // 2.5 sekundy trwania
+                            });
+                        }, 200);
+
+                        animated = true;
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(statsSection);
+        });
+    </script>
 <!-- 
     WAŻNE: Aby ikonki działały, wklej poniższą linię do sekcji <head> swojego pliku index.html:
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
