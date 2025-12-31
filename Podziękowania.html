@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dziękujemy za kontakt</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+        /* Reset i ustawienia bazowe */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            background: #ffffff;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #000;
+        }
+
+        .thank-you-wrapper {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            perspective: 1000px;
+            background: #ffffff;
+        }
+
+        /* Subtelne sfery w tle */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            opacity: 0.5;
+            animation: moveOrb 25s infinite alternate;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #f0f0f0 0%, #e0e0e0 100%);
+            top: -15%;
+            left: -10%;
+        }
+
+        .orb-2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #f5f5f5 0%, #ebebeb 100%);
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -7s;
+        }
+
+        /* Szklana karta - Light Glassmorphism */
+        .glass-card {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 600px;
+            padding: 70px 40px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 48px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
+            animation: cardEnter 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        /* Ikona sukcesu */
+        .glass-icon {
+            width: 110px;
+            height: 110px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            border-radius: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 40px auto;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+            animation: 
+                iconPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both,
+                float 6s ease-in-out infinite;
+        }
+
+        .glass-icon svg {
+            width: 44px;
+            height: 44px;
+            stroke: #000;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: drawCheck 1s ease-out 1s forwards;
+        }
+
+        /* Tekst */
+        h1 {
+            font-size: clamp(2.2rem, 6vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            color: #000;
+            margin: 0 0 20px 0;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        p {
+            font-size: 17px;
+            color: #666;
+            line-height: 1.8;
+            max-width: 420px;
+            margin: 0 auto 50px auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+
+        /* Przycisk powrotu */
+        .glass-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            padding: 22px 50px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .glass-btn:hover {
+            background: #222;
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .glass-btn svg {
+            transition: transform 0.4s ease;
+        }
+
+        .glass-btn:hover svg {
+            transform: translateX(-6px);
+        }
+
+        /* Definicje Animacji */
+        @keyframes moveOrb {
+            from { transform: translate(0, 0); }
+            to { transform: translate(60px, 40px); }
+        }
+
+        @keyframes cardEnter {
+            from { opacity: 0; transform: translateY(60px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes iconPop {
+            from { opacity: 0; transform: scale(0.6); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+        }
+
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .glass-card { padding: 50px 25px; border-radius: 40px; }
+            h1 { font-size: 2.5rem; }
+            p { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="thank-you-wrapper">
+        <!-- Subtelne tło pastelowe -->
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+
+        <div class="glass-card">
+            <!-- Ikona Sukcesu -->
+            <div class="glass-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+                </svg>
+            </div>
+
+            <div class="thank-you-content">
+                <h1>Wiadomość dotarła.</h1>
+                <p>Dziękujemy za kontakt. Twoje zgłoszenie zostało pomyślnie zarejestrowane. Odpowiemy w ciągu najbliższych 24 godzin.</p>
+                
+                <!-- TUTAJ WPISZ ADRES SWOJEJ STRONY GŁÓWNEJ -->
+                <a href="https://printlu.pl" class="glass-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Wróć do strony
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
