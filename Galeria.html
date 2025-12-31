@@ -1,0 +1,206 @@
+<!-- 1. CSS: Stylizacja sekcji -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    /* Główny kolor akcentowy - złoty/beżowy */
+    :root {
+        --accent-color: #c5a059;
+    }
+
+    .gallery-component-wrapper {
+        font-family: 'Inter', sans-serif;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        color: var(--accent-color);
+        padding: 80px 20px;
+        text-align: center;
+    }
+
+    .gallery-title-container {
+        margin-bottom: 50px;
+    }
+
+    .gallery-title {
+        font-size: 1.1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+        margin: 0;
+        color: var(--accent-color);
+        display: inline-block;
+        position: relative;
+    }
+
+    .gallery-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 1px;
+        background: var(--accent-color);
+        margin: 15px auto 0;
+    }
+
+    .gallery-row {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        flex: 1;
+        aspect-ratio: 1 / 1;
+        background: #1a1a1a;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: pointer;
+        border: 1px solid rgba(197, 160, 89, 0.2);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        border-color: var(--accent-color);
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.08);
+    }
+
+    /* Nakładka na dole - nie zakrywa całego zdjęcia */
+    .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 25px;
+        height: 40%; /* Tylko dolna część zdjęcia */
+        transform: translateY(100%);
+        transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        text-align: left;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+        transform: translateY(0);
+    }
+
+    .overlay-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        margin: 0;
+    }
+
+    .overlay-desc {
+        font-size: 0.65rem;
+        font-weight: 400;
+        color: #ffffff;
+        margin-top: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        opacity: 0.8;
+    }
+
+    /* Przycisk Zobacz Więcej w kolorze złotym */
+    .glass-btn-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .glass-btn {
+        display: inline-block;
+        padding: 16px 40px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--accent-color);
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(197, 160, 89, 0.4);
+        border-radius: 50px;
+        transition: all 0.4s ease;
+    }
+
+    .glass-btn:hover {
+        background: var(--accent-color);
+        color: #000;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2);
+    }
+
+    /* Responsywność */
+    @media (max-width: 850px) {
+        .gallery-row {
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+        .gallery-item {
+            width: 100%;
+            max-width: 400px;
+        }
+    }
+</style>
+
+<!-- 2. HTML: Struktura galerii -->
+<div class="gallery-component-wrapper">
+    
+    <div class="gallery-title-container">
+        <h2 class="gallery-title">Wybrane Realizacje</h2>
+    </div>
+    
+    <div class="gallery-row">
+        <!-- Projekt 1 -->
+        <div class="gallery-item">
+            <img src="images/355.jpg" alt="Projekt 1" onerror="this.src='https://via.placeholder.com/600x600/1a1a1a/c5a059?text=Projekt+1'">
+            <div class="gallery-overlay">
+                <h3 class="overlay-title">Modern Interior</h3>
+                <p class="overlay-desc">Apartament Warszawa</p>
+            </div>
+        </div>
+
+        <!-- Projekt 2 -->
+        <div class="gallery-item">
+            <img src="images/355.jpg" alt="Projekt 2" onerror="this.src='https://via.placeholder.com/600x600/1a1a1a/c5a059?text=Projekt+2'">
+            <div class="gallery-overlay">
+                <h3 class="overlay-title">Minimalist Studio</h3>
+                <p class="overlay-desc">Projekt koncepcyjny</p>
+            </div>
+        </div>
+
+        <!-- Projekt 3 -->
+        <div class="gallery-item">
+            <img src="images/355.jpg" alt="Projekt 3" onerror="this.src='https://via.placeholder.com/600x600/1a1a1a/c5a059?text=Projekt+3'">
+            <div class="gallery-overlay">
+                <h3 class="overlay-title">Industrial Loft</h3>
+                <p class="overlay-desc">Wizualizacja 3D</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Przycisk pod galerią -->
+    <div class="glass-btn-container">
+        <a href="#" class="glass-btn">Wszystkie projekty</a>
+    </div>
+</div>
