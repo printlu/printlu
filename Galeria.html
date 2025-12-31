@@ -55,46 +55,53 @@
         flex: 1;
         aspect-ratio: 1 / 1;
         background: #1a1a1a;
-        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        /* Poprawiona płynność transition */
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.6s ease;
         cursor: pointer;
         border: 1px solid rgba(197, 160, 89, 0.2);
+        /* Zapobieganie migotaniu na Safari/Chrome */
+        backface-visibility: hidden;
+        -webkit-font-smoothing: subpixel-antialiased;
     }
 
     .gallery-item img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
+        /* Wolniejszy zoom dla lepszego efektu */
         transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .gallery-item:hover {
         transform: translateY(-10px);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         border-color: var(--accent-color);
     }
 
     .gallery-item:hover img {
-        transform: scale(1.08);
+        transform: scale(1.1);
     }
 
-    /* Nakładka na dole - nie zakrywa całego zdjęcia */
+    /* Nakładka na dole - poprawiona płynność wysuwania */
     .gallery-overlay {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-start;
         padding: 25px;
-        height: 40%; /* Tylko dolna część zdjęcia */
-        transform: translateY(100%);
+        height: 45%; 
+        transform: translateY(101%); /* 101% aby ukryć krawędź */
         transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         text-align: left;
+        pointer-events: none; /* Żeby nakładka nie przeszkadzała w hoverze */
     }
 
     .gallery-item:hover .gallery-overlay {
@@ -118,7 +125,7 @@
         opacity: 0.8;
     }
 
-    /* Przycisk Zobacz Więcej w kolorze złotym */
+    /* Przycisk Zobacz Więcej */
     .glass-btn-container {
         display: flex;
         justify-content: center;
@@ -134,19 +141,20 @@
         letter-spacing: 0.2em;
         color: var(--accent-color);
         text-decoration: none;
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(197, 160, 89, 0.4);
+        border: 1px solid rgba(197, 160, 89, 0.3);
         border-radius: 50px;
-        transition: all 0.4s ease;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .glass-btn:hover {
         background: var(--accent-color);
         color: #000;
         transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2);
+        box-shadow: 0 10px 25px rgba(197, 160, 89, 0.2);
+        border-color: var(--accent-color);
     }
 
     /* Responsywność */
@@ -173,7 +181,7 @@
     <div class="gallery-row">
         <!-- Projekt 1 -->
         <div class="gallery-item">
-            <img src="images/355.jpg" alt="Projekt 1" onerror="this.src='https://via.placeholder.com/600x600/1a1a1a/c5a059?text=Projekt+1'">
+            <img src="images/355.jpg" alt="Projekt 1" onerror="this.src='https://via.placeholder.com/600x600/1a1a1a/c5a059?text=355.jpg'">
             <div class="gallery-overlay">
                 <h3 class="overlay-title">Modern Interior</h3>
                 <p class="overlay-desc">Apartament Warszawa</p>
@@ -182,7 +190,7 @@
 
         <!-- Projekt 2 -->
         <div class="gallery-item">
-            <img src="images/355.jpg" alt="Projekt 2" onerror="this.src='https://via.placeholder.com/600x600/1a1a1a/c5a059?text=Projekt+2'">
+            <img src="images/355.jpg" alt="Projekt 2" onerror="this.src='https://via.placeholder.com/600x600/1a1a1a/c5a059?text=355.jpg'">
             <div class="gallery-overlay">
                 <h3 class="overlay-title">Minimalist Studio</h3>
                 <p class="overlay-desc">Projekt koncepcyjny</p>
@@ -191,7 +199,7 @@
 
         <!-- Projekt 3 -->
         <div class="gallery-item">
-            <img src="images/355.jpg" alt="Projekt 3" onerror="this.src='https://via.placeholder.com/600x600/1a1a1a/c5a059?text=Projekt+3'">
+            <img src="images/355.jpg" alt="Projekt 3" onerror="this.src='https://via.placeholder.com/600x600/1a1a1a/c5a059?text=355.jpg'">
             <div class="gallery-overlay">
                 <h3 class="overlay-title">Industrial Loft</h3>
                 <p class="overlay-desc">Wizualizacja 3D</p>
