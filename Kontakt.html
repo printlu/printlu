@@ -64,7 +64,7 @@
 		</div><!--header-wrap-->
 	</header>
 
-<!-- Minimalistyczna, prestiżowa sekcja kontaktowa - Wersja z polską walidacją -->
+<!-- Minimalistyczna, prestiżowa sekcja kontaktowa - Z przekierowaniem po wysłaniu -->
 <div class="contact-ultra-section">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
@@ -210,8 +210,18 @@
         <p>Odpowiadamy zazwyczaj w ciągu 24 godzin</p>
     </div>
 
-    <!-- Dodano lang="pl" oraz zindywidualizowane komunikaty błędów -->
-    <form id="ultraContactForm" class="ultra-form-card kwes-form" action="https://kwesforms.com/api/f/RCSc5aEnnQCvvdv2itGe" data-kw-realtime-validation="false" lang="pl">
+    <!-- 
+      DODANO: success-redirect="https://twoja-strona.pl/podziekowanie"
+      Zmień poniższy adres na URL Twojej strony z podziękowaniem.
+    -->
+    <form 
+        id="ultraContactForm" 
+        class="ultra-form-card kwes-form" 
+        action="https://kwesforms.com/api/f/RCSc5aEnnQCvvdv2itGe" 
+        data-kw-realtime-validation="false" 
+        lang="pl"
+        success-redirect="https://twoja-strona.pl/podziekowanie"
+    >
         <div class="ultra-grid">
             
             <div class="field-container">
@@ -238,7 +248,6 @@
         </div>
     </form>
 </div>
-
 <script>
     const fileInput = document.getElementById('file-input');
     const fileNameDisplay = document.getElementById('file-name-display');
