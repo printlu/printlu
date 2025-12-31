@@ -408,7 +408,160 @@
 			</div>
 		</div>
 	</section>
+	<!-- Nowoczesny, szeroki komponent z efektem szkła - Integracja KwesForms -->
+<div class="contact-glass-wrapper">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+        .contact-glass-wrapper {
+            width: 100%;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            box-sizing: border-box;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Możesz dodać tło pod spodem, aby zobaczyć efekt przezroczystości */
+        }
+
+        .contact-glass-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-glass-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #000;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        /* Kontener formularza z efektem szkła */
+        .contact-glass-bar {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.7); /* Przezroczyste białe tło */
+            backdrop-filter: blur(10px); /* Rozmycie tła */
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px; /* Duże zaokrąglenie całego paska */
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-field {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .glass-field.message {
+            flex: 2;
+        }
+
+        /* Zaokrąglone i przezroczyste pola */
+        .glass-input {
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px; /* Zaokrąglone pola */
+            padding: 15px 20px;
+            font-size: 15px;
+            color: #000;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #000;
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-input::placeholder {
+            color: #888;
+        }
+
+        /* Zaokrąglony czarny przycisk */
+        .glass-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 20px; /* Zaokrąglony przycisk */
+            padding: 15px 35px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .glass-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-btn:active {
+            transform: translateY(0);
+        }
+
+        /* KwesForms błędy */
+        .kw-border-error {
+            border-color: #ff4d4d !important;
+        }
+        
+        .kw-msg-error {
+            font-size: 11px;
+            color: #ff4d4d;
+            padding-left: 10px;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 850px) {
+            .contact-glass-bar {
+                flex-direction: column;
+                padding: 25px;
+                border-radius: 40px;
+            }
+            .glass-field, .glass-btn {
+                width: 100%;
+            }
+            .glass-btn {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <div class="contact-glass-header">
+        <h2>Skontaktuj się</h2>
+    </div>
+
+    <form id="glassContactForm" class="contact-glass-bar kwes-form" action="https://kwesforms.com/api/f/RCSc5aEnnQCvvdv2itGe">
+        
+        <div class="glass-field">
+            <input type="text" name="name" placeholder="Twoje imię" required class="glass-input">
+        </div>
+
+        <div class="glass-field">
+            <input type="email" name="email" placeholder="Twój e-mail" required class="glass-input">
+        </div>
+
+        <div class="glass-field message">
+            <input type="text" name="message" placeholder="W czym możemy pomóc?" required class="glass-input">
+        </div>
+
+        <button type="submit" class="glass-btn">
+            Wyślij
+        </button>
+    </form>
+</div>
 	<section id="clients" class="bg-grey padding-large">
 		<div class="container-lg" data-aos="zoom-in-up" data-aos-delay="300">
 			<div class="row">
@@ -791,6 +944,7 @@
 </body>
 
 </html>
+
 
 
 
