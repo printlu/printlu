@@ -553,38 +553,77 @@
 			</div>
 		</div>
 	</section>
+<!-- KOD DO WKLEJENIA W DOWOLNE MIEJSCE NA STRONIE -->
 
-	<section id="features" class="padding-large pt-0">
-		<div class="container-lg" data-aos="zoom-in-up" data-aos-delay="300">
-			<div class="row">
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">12</h3>
-						<p class="text-uppercase">Years of experience</p>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">320+</h3>
-						<p class="text-uppercase">satisfied clients</p>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">55</h3>
-						<p class="text-uppercase">employees worldwide</p>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="milestone text-center">
-						<h3 class="display-1 m-0">220+</h3>
-						<p class="text-uppercase">projects completed</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<style>
+    /* Style dla animacji pojawiania się */
+    .stat-item {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .stat-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Klasy pomocnicze, jeśli nie używasz Tailwind na całej stronie */
+    .stats-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+        text-align: center;
+    }
+    .stat-number {
+        font-size: clamp(3rem, 8vw, 4.5rem);
+        font-weight: 200;
+        color: #000;
+        letter-spacing: -0.05em;
+        margin-bottom: 0.5rem;
+        line-height: 1;
+    }
+    .stat-label {
+        font-size: 11px;
+        color: #000;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4em;
+    }
+</style>
 
+<section class="stats-wrapper">
+    <div class="stats-container">
+        
+        <!-- Statystyka 1 -->
+        <div class="stat-item">
+            <div class="stat-number">
+                <span class="count-up" data-target="2">0</span>+
+            </div>
+            <p class="stat-label">Lata doświadczenia</p>
+        </div>
+
+        <!-- Statystyka 2 -->
+        <div class="stat-item" style="transition-delay: 200ms;">
+            <div class="stat-number">
+                <span class="count-up" data-target="100">0</span>+
+            </div>
+            <p class="stat-label">Zadowolonych klientów</p>
+        </div>
+
+        <!-- Statystyka 3 -->
+        <div class="stat-item" style="transition-delay: 400ms;">
+            <div class="stat-number">
+                <span class="count-up" data-target="300">0</span>+
+            </div>
+            <p class="stat-label">Projekty 3D</p>
+        </div>
+
+    </div>
+</section>
 <style>
     /* Bezpośredni import dla pewności działania ikon */
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
@@ -835,6 +874,7 @@
 </body>
 
 </html>
+
 
 
 
