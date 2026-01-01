@@ -1503,9 +1503,100 @@
         }, 500);
     }
 </script>
+<!-- PRZYCISK POWRÓT NA GÓRĘ - START -->
+<style>
+    /* Styl przycisku */
+    #scrollToTopBtn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 999;
+        width: 50px;
+        height: 50px;
+        background-color: #8F6D4E; /* Twój główny kolor */
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+    }
+
+    /* Wyświetlanie przycisku */
+    #scrollToTopBtn.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* Efekt po najechaniu */
+    #scrollToTopBtn:hover {
+        background-color: #4A443F; /* Elegancki ciemny szary */
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        transform: translateY(-5px);
+    }
+
+    /* Styl białej strzałki */
+    .arrow-icon-svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+        transition: transform 0.3s ease;
+    }
+
+    #scrollToTopBtn:hover .arrow-icon-svg {
+        transform: translateY(-2px);
+    }
+
+    /* Responsywność */
+    @media (max-width: 768px) {
+        #scrollToTopBtn {
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+        }
+    }
+</style>
+
+<button id="scrollToTopBtn" title="Wróć na górę">
+    <svg class="arrow-icon-svg" viewBox="0 0 24 24">
+        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+    </svg>
+</button>
+
+<script>
+    (function() {
+        const btn = document.getElementById("scrollToTopBtn");
+        
+        // Pokaż przycisk po przewinięciu o 100px
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 100) {
+                btn.classList.add("show");
+            } else {
+                btn.classList.remove("show");
+            }
+        });
+
+        // Płynny powrót na górę po kliknięciu
+        btn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    })();
+</script>
+<!-- PRZYCISK POWRÓT NA GÓRĘ - KONIEC -->
 </body>
 
 </html>
+
 
 
 
