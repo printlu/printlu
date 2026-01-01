@@ -1249,9 +1249,264 @@
         }
     })();
 </script>
+<!-- 
+  INSTRUKCJA WDROŻENIA:
+  1. Skopiuj całą treść tego pliku.
+  2. Wklej ją na swojej stronie tuż przed zamknięciem znacznika </body>.
+  3. Jeśli Twoja strona nie używa Tailwind CSS, upewnij się, że zostawiasz linię z biblioteką <script src="https://cdn.tailwindcss.com"></script>.
+-->
+
+<!-- Biblioteki wymagane do działania (jeśli już je masz na stronie, możesz pominąć te dwie linie) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+        --brand-color: #8F6D4E;
+        --radius: 2.5rem;
+        --text-main: #2D2621; 
+        --text-muted: #6B6158;
+    }
+
+    #cookie-banner-wrapper {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Szklany efekt panelu */
+    .cookie-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: var(--radius);
+        box-shadow: 0 30px 60px -15px rgba(143, 109, 78, 0.15);
+    }
+
+    /* Animacja wejścia */
+    .spring-enter {
+        animation: springIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes springIn {
+        0% { transform: translateY(100px) scale(0.9); opacity: 0; }
+        100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Custom Toggle Switch */
+    .toggle-dot {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    input:checked ~ .toggle-bg {
+        background-color: var(--brand-color);
+    }
+    input:checked ~ .toggle-bg .toggle-dot {
+        transform: translateX(1.25rem);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .btn-primary-cookies {
+        background-color: var(--brand-color);
+        color: white;
+        transition: all 0.3s ease;
+    }
+    .btn-primary-cookies:hover {
+        background-color: #7a5c41;
+        transform: translateY(-1px);
+    }
+    .btn-secondary-cookies {
+        background: transparent;
+        color: var(--brand-color);
+        border: 1px solid #e5e0db;
+        transition: all 0.3s ease;
+    }
+    .btn-secondary-cookies:hover {
+        background-color: rgba(143, 109, 78, 0.05);
+        border-color: var(--brand-color);
+    }
+
+    .tracking-tight-custom {
+        letter-spacing: -0.04em;
+    }
+</style>
+
+<div id="cookie-banner-wrapper">
+    <!-- WIDGET COOKIE -->
+    <div id="cookie-banner" class="fixed bottom-8 right-8 z-[9999] hidden w-[calc(100%-4rem)] sm:w-[380px]">
+        <div class="cookie-card p-8 spring-enter text-left">
+            <!-- Header -->
+            <div class="flex items-center gap-5 mb-7">
+                <div class="w-14 h-14 flex items-center justify-center bg-[#8F6D4E] text-white rounded-[1.6rem] shadow-xl shadow-[#8F6D4E]/20">
+                    <i data-lucide="shield-check" class="w-7 h-7"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-extrabold text-[#2D2621] tracking-tight-custom leading-tight">Ustawienia<br>prywatności</h3>
+                </div>
+            </div>
+
+            <!-- Treść -->
+            <p class="text-[13px] text-[#6B6158] leading-relaxed mb-8 font-medium">
+                Szanujemy Twoją prywatność. Wybierz preferencje dotyczące technologii, których używamy, aby strona działała dla Ciebie idealnie.
+            </p>
+
+            <!-- Akcje -->
+            <div class="flex flex-col gap-3">
+                <button onclick="acceptAllCookies()" class="btn-primary-cookies w-full py-4 rounded-[1.4rem] text-[11px] font-bold uppercase tracking-widest shadow-lg shadow-[#8F6D4E]/10 active:scale-[0.97]">
+                    Akceptuję wszystkie
+                </button>
+                <button onclick="openCookieSettings()" class="btn-secondary-cookies w-full py-4 rounded-[1.4rem] text-[11px] font-bold uppercase tracking-widest active:scale-[0.97]">
+                    Dostosuj wybór
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL USTAWIEŃ -->
+    <div id="cookie-settings-modal" class="fixed inset-0 z-[10000] hidden bg-[#8F6D4E]/5 backdrop-blur-xl flex items-center justify-center p-6 opacity-0 transition-opacity duration-500">
+        <div class="bg-white/95 backdrop-blur-3xl w-full max-w-[460px] rounded-[3rem] shadow-[0_50px_120px_rgba(143,109,78,0.15)] border border-white overflow-hidden transform scale-90 transition-transform duration-500" id="modal-content-cookies">
+            
+            <!-- Modal Header -->
+            <div class="p-10 pb-4 flex justify-between items-center">
+                <h3 class="text-3xl font-extrabold text-[#2D2621] tracking-tight-custom uppercase">Preferencje</h3>
+                <button onclick="closeCookieSettings()" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-100 text-gray-400 transition">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Lista opcji -->
+            <div class="p-10 pt-4 space-y-5 max-h-[50vh] overflow-y-auto no-scrollbar">
+                <!-- Niezbędne -->
+                <div class="group p-6 rounded-[2rem] bg-gray-50/50 border border-gray-100 flex items-center justify-between">
+                    <div class="flex-1 pr-6">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-[#8F6D4E]/60 block mb-1">Status: Aktywne</span>
+                        <p class="text-sm font-bold text-[#2D2621] uppercase tracking-tighter">Funkcjonalne</p>
+                    </div>
+                    <div class="relative w-11 h-6 bg-[#8F6D4E]/10 rounded-full opacity-40">
+                        <div class="absolute right-1 top-1 w-4 h-4 bg-[#8F6D4E] rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Analityka -->
+                <div class="group p-6 rounded-[2rem] bg-gray-50/50 border border-gray-100 flex items-center justify-between">
+                    <div class="flex-1 pr-6">
+                        <p class="text-sm font-bold text-[#2D2621] uppercase tracking-tighter mb-1">Analityka</p>
+                        <p class="text-[11px] text-[#6B6158] font-medium">Analiza ruchu na stronie.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="toggle-analytics-cookies" class="sr-only">
+                        <div class="toggle-bg w-11 h-6 bg-gray-200 rounded-full transition-colors">
+                            <div class="toggle-dot absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Marketing -->
+                <div class="group p-6 rounded-[2rem] bg-gray-50/50 border border-gray-100 flex items-center justify-between">
+                    <div class="flex-1 pr-6">
+                        <p class="text-sm font-bold text-[#2D2621] uppercase tracking-tighter mb-1">Marketing</p>
+                        <p class="text-[11px] text-[#6B6158] font-medium">Personalizacja treści i reklam.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="toggle-marketing-cookies" class="sr-only">
+                        <div class="toggle-bg w-11 h-6 bg-gray-200 rounded-full transition-colors">
+                            <div class="toggle-dot absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-10 pt-4">
+                <button onclick="saveCookiePreferences()" class="btn-primary-cookies w-full py-5 rounded-[2rem] text-[11px] font-bold uppercase tracking-widest shadow-lg active:scale-[0.98]">
+                    Zapisz i zamknij
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Inicjalizacja ikon
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
+    const COOKIE_UI = {
+        storageKey: 'user_consent_prefs_v1',
+        banner: document.getElementById('cookie-banner'),
+        modal: document.getElementById('cookie-settings-modal'),
+        modalContent: document.getElementById('modal-content-cookies'),
+        toggles: {
+            analytics: document.getElementById('toggle-analytics-cookies'),
+            marketing: document.getElementById('toggle-marketing-cookies')
+        }
+    };
+
+    // Sprawdzenie zgody po załadowaniu
+    window.addEventListener('load', () => {
+        const consent = localStorage.getItem(COOKIE_UI.storageKey);
+        if (!consent) {
+            setTimeout(() => {
+                COOKIE_UI.banner.classList.remove('hidden');
+            }, 1500);
+        }
+    });
+
+    function acceptAllCookies() {
+        const data = { analytics: true, marketing: true, date: new Date().toISOString() };
+        saveAndExit(data);
+    }
+
+    function saveCookiePreferences() {
+        const data = {
+            analytics: COOKIE_UI.toggles.analytics.checked,
+            marketing: COOKIE_UI.toggles.marketing.checked,
+            date: new Date().toISOString()
+        };
+        saveAndExit(data);
+    }
+
+    function saveAndExit(data) {
+        localStorage.setItem(COOKIE_UI.storageKey, JSON.stringify(data));
+        closeCookieSettings();
+        
+        // Animacja wyjścia baneru
+        COOKIE_UI.banner.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        COOKIE_UI.banner.style.opacity = '0';
+        COOKIE_UI.banner.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            COOKIE_UI.banner.classList.add('hidden');
+        }, 600);
+
+        // Tutaj możesz wywołać funkcje ładujące skrypty np. Google Analytics
+        console.log("Zapisano preferencje:", data);
+    }
+
+    function openCookieSettings() {
+        COOKIE_UI.modal.classList.remove('hidden');
+        setTimeout(() => {
+            COOKIE_UI.modal.classList.add('opacity-100');
+            COOKIE_UI.modalContent.classList.remove('scale-90');
+            COOKIE_UI.modalContent.classList.add('scale-100');
+        }, 10);
+    }
+
+    function closeCookieSettings() {
+        COOKIE_UI.modal.classList.remove('opacity-100');
+        COOKIE_UI.modalContent.classList.add('scale-90');
+        setTimeout(() => {
+            COOKIE_UI.modal.classList.add('hidden');
+        }, 500);
+    }
+</script>
 </body>
 
 </html>
+
 
 
 
