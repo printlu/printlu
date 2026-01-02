@@ -404,27 +404,27 @@
             
             font-family: 'Plus Jakarta Sans', sans-serif;
             
-            /* CAŁKOWITE USUNIĘCIE LUK MIĘDZYSEKCYJNYCH */
+            /* USUNIĘCIE WSZELKICH LUK */
             padding: 0 !important;
             margin: 0 !important;
-            display: block; /* Eliminuje luki typu inline */
+            display: flex;
+            flex-direction: column;
             vertical-align: top;
-            
             background: transparent;
             overflow: hidden;
             position: relative;
             width: 100%;
         }
 
-        /* Nagłówek - tutaj kontrolujemy wewnętrzny odstęp treści od krawędzi sekcji */
+        /* Nagłówek */
         .premium-testimonials-v2 .t-header {
             text-align: center;
             margin-bottom: 60px;
-            padding: 40px 20px 0 20px; /* 40px odstępu treści od samej góry sekcji */
+            padding: 40px 20px 0 20px;
         }
 
         .premium-testimonials-v2 .t-header h2 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 700;
             color: var(--t-text-dark);
             letter-spacing: -1.5px;
@@ -432,31 +432,24 @@
             line-height: 1.1;
         }
 
-        .premium-testimonials-v2 .t-header p {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--t-brand-color);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        /* Kontener Marquee */
+        /* Kontener Marquee - Klucz do nieskończoności */
         .premium-testimonials-v2 .t-marquee-container {
             display: flex;
+            overflow: hidden;
             user-select: none;
             gap: 30px;
-            padding-bottom: 40px; /* Odstęp treści od samego dołu sekcji */
+            padding-bottom: 60px;
+            width: 100%;
         }
 
         .premium-testimonials-v2 .t-marquee-track {
             flex-shrink: 0;
             display: flex;
             align-items: center;
-            justify-content: space-around;
             gap: 30px;
-            min-width: 100%;
-            animation: t-scroll 30s linear infinite;
+            /* Animacja przesuwająca dokładnie o szerokość jednego tracka */
+            animation: t-scroll 45s linear infinite;
+            padding-right: 30px; /* Dopasowanie do gapu */
         }
 
         .premium-testimonials-v2:hover .t-marquee-track {
@@ -466,6 +459,7 @@
         /* Karta Opinii */
         .premium-testimonials-v2 .t-card {
             width: 380px;
+            flex-shrink: 0;
             padding: 45px;
             background: var(--t-glass-bg);
             backdrop-filter: blur(20px) saturate(180%);
@@ -479,9 +473,8 @@
         }
 
         .premium-testimonials-v2 .t-card:hover {
-            transform: translateY(-15px) scale(1.03);
+            transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 40px 80px rgba(143, 109, 78, 0.12);
             border-color: var(--t-brand-color);
         }
 
@@ -498,7 +491,7 @@
         }
 
         .premium-testimonials-v2 .t-quote {
-            font-size: 17px;
+            font-size: 16px;
             line-height: 1.7;
             color: var(--t-text-dark);
             font-weight: 500;
@@ -513,40 +506,26 @@
         }
 
         .premium-testimonials-v2 .t-avatar {
-            width: 52px;
-            height: 52px;
-            border-radius: 18px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
             background: var(--t-brand-color);
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 16px;
-            box-shadow: 0 10px 20px rgba(143, 109, 78, 0.2);
-        }
-
-        .premium-testimonials-v2 .t-info span {
-            display: block;
-        }
-
-        .premium-testimonials-v2 .t-name {
             font-size: 15px;
-            font-weight: 700;
-            color: var(--t-text-dark);
         }
 
-        .premium-testimonials-v2 .t-role {
-            font-size: 11px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 2px;
-        }
+        .premium-testimonials-v2 .t-info span { display: block; }
+        .premium-testimonials-v2 .t-name { font-size: 15px; font-weight: 700; color: var(--t-text-dark); }
+        .premium-testimonials-v2 .t-role { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
 
+        /* ANIMACJA NIESKOŃCZONA */
         @keyframes t-scroll {
             from { transform: translateX(0); }
-            to { transform: translateX(calc(-100% - 30px)); }
+            to { transform: translateX(-100%); }
         }
 
         /* Efekt zanikania bocznego */
@@ -555,18 +534,17 @@
             content: "";
             position: absolute;
             top: 0;
-            width: 200px;
+            width: 15%;
             height: 100%;
-            z-index: 5;
+            z-index: 10;
             pointer-events: none;
         }
-        .premium-testimonials-v2::before { left: 0; background: linear-gradient(to right, white, transparent); }
-        .premium-testimonials-v2::after { right: 0; background: linear-gradient(to left, white, transparent); }
+        .premium-testimonials-v2::before { left: 0; background: linear-gradient(to right, #fff, transparent); }
+        .premium-testimonials-v2::after { right: 0; background: linear-gradient(to left, #fff, transparent); }
 
         @media (max-width: 768px) {
-            .premium-testimonials-v2 .t-header h2 { font-size: 2.2rem; }
-            .premium-testimonials-v2 .t-card { width: 320px; padding: 30px; }
-            .premium-testimonials-v2 .t-header { padding-top: 20px; }
+            .premium-testimonials-v2 .t-card { width: 300px; padding: 30px; }
+            .premium-testimonials-v2::before, .premium-testimonials-v2::after { width: 50px; }
         }
     </style>
 
@@ -594,7 +572,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="t-card">
                 <div class="t-stars">
                     <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -612,7 +589,180 @@
                     </div>
                 </div>
             </div>
-            <!-- Duplicate content omitted for brevity in preview, keep it in your real file -->
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Dostarczyli rozwiązanie, które odmieniło sposób, w jaki klienci postrzegają naszą markę. Pełna rekomendacja."</p>
+                <div class="t-author">
+                    <div class="t-avatar">MW</div>
+                    <div class="t-info">
+                        <span class="t-name">Michał Wolski</span>
+                        <span class="t-role">Founder Boutique</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Profesjonalizm na każdym etapie. Od koncepcji po końcowe wdrożenie - wszystko przebiegło idealnie."</p>
+                <div class="t-author">
+                    <div class="t-avatar">SN</div>
+                    <div class="t-info">
+                        <span class="t-name">Sonia Nowak</span>
+                        <span class="t-role">Marketing Manager</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Bardzo świeże podejście do designu. Nasz nowy serwis przyciąga uwagę i konwertuje lepiej."</p>
+                <div class="t-author">
+                    <div class="t-avatar">RP</div>
+                    <div class="t-info">
+                        <span class="t-name">Robert Polak</span>
+                        <span class="t-role">Sales Director</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Rzadko spotyka się taką dbałość o detale i zrozumienie potrzeb klienta premium."</p>
+                <div class="t-author">
+                    <div class="t-avatar">EM</div>
+                    <div class="t-info">
+                        <span class="t-name">Ewa Mazur</span>
+                        <span class="t-role">Creative Lead</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Track 2 (DOKŁADNY DUPLIKAT DLA EFEKTU NIESKOŃCZONOŚCI) -->
+        <div class="t-marquee-track">
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Niesamowita precyzja i wyczucie stylu. Współpraca z tym zespołem to gwarancja najwyższej jakości i dbałości o detale."</p>
+                <div class="t-author">
+                    <div class="t-avatar">JD</div>
+                    <div class="t-info">
+                        <span class="t-name">Jakub Dębski</span>
+                        <span class="t-role">CEO Luxury Group</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Projekt przerosł moje oczekiwania pod kątem UX i estetyki. Prawdziwy Quiet Luxury w cyfrowym wydaniu."</p>
+                <div class="t-author">
+                    <div class="t-avatar">AK</div>
+                    <div class="t-info">
+                        <span class="t-name">Alicja Kowal</span>
+                        <span class="t-role">Art Director</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Dostarczyli rozwiązanie, które odmieniło sposób, w jaki klienci postrzegają naszą markę. Pełna rekomendacja."</p>
+                <div class="t-author">
+                    <div class="t-avatar">MW</div>
+                    <div class="t-info">
+                        <span class="t-name">Michał Wolski</span>
+                        <span class="t-role">Founder Boutique</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Profesjonalizm na każdym etapie. Od koncepcji po końcowe wdrożenie - wszystko przebiegło idealnie."</p>
+                <div class="t-author">
+                    <div class="t-avatar">SN</div>
+                    <div class="t-info">
+                        <span class="t-name">Sonia Nowak</span>
+                        <span class="t-role">Marketing Manager</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Bardzo świeże podejście do designu. Nasz nowy serwis przyciąga uwagę i konwertuje lepiej."</p>
+                <div class="t-author">
+                    <div class="t-avatar">RP</div>
+                    <div class="t-info">
+                        <span class="t-name">Robert Polak</span>
+                        <span class="t-role">Sales Director</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Rzadko spotyka się taką dbałość o detale i zrozumienie potrzeb klienta premium."</p>
+                <div class="t-author">
+                    <div class="t-avatar">EM</div>
+                    <div class="t-info">
+                        <span class="t-name">Ewa Mazur</span>
+                        <span class="t-role">Creative Lead</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -1444,6 +1594,7 @@
 </body>
 
 </html>
+
 
 
 
