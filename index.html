@@ -389,7 +389,348 @@
     </div>
 </div>
 
+<!-- TESTIMONIALS SECTION START - Copy from here -->
+<section class="premium-testimonials-v2">
+    <style>
+        /* Import czcionki - jeśli masz ją już na stronie, możesz to usunąć */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
+        .premium-testimonials-v2 {
+            --t-brand-color: #8F6D4E; /* Twój kolor logo */
+            --t-glass-bg: rgba(255, 255, 255, 0.7);
+            --t-glass-border: rgba(143, 109, 78, 0.1); /* Delikatny odcień logo na obramowaniu */
+            --t-text-dark: #000000;
+            --t-text-gray: #666666;
+            
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding: 100px 0;
+            background: transparent;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Większy, elegancki nagłówek */
+        .premium-testimonials-v2 .t-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 20px;
+        }
+
+        .premium-testimonials-v2 .t-header h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--t-text-dark);
+            letter-spacing: -1.5px;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .premium-testimonials-v2 .t-header p {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--t-brand-color); /* Kolor logo w nadtytule */
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Kontener Marquee */
+        .premium-testimonials-v2 .t-marquee-container {
+            display: flex;
+            user-select: none;
+            gap: 30px;
+        }
+
+        .premium-testimonials-v2 .t-marquee-track {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 30px;
+            min-width: 100%;
+            animation: t-scroll 30s linear infinite; /* Szybkość dostosowana do płynności */
+        }
+
+        /* Zatrzymanie po najechaniu */
+        .premium-testimonials-v2:hover .t-marquee-track {
+            animation-play-state: paused;
+        }
+
+        /* Karta Opinii - Glassmorphism */
+        .premium-testimonials-v2 .t-card {
+            width: 380px;
+            padding: 45px;
+            background: var(--t-glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--t-glass-border);
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(143, 109, 78, 0.05);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .premium-testimonials-v2 .t-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 40px 80px rgba(143, 109, 78, 0.12);
+            border-color: var(--t-brand-color);
+        }
+
+        /* Gwiazdki w kolorze logo */
+        .premium-testimonials-v2 .t-stars {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 25px;
+        }
+
+        .premium-testimonials-v2 .t-stars svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--t-brand-color);
+        }
+
+        /* Treść */
+        .premium-testimonials-v2 .t-quote {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--t-text-dark);
+            font-weight: 500;
+            margin-bottom: 35px;
+        }
+
+        /* Autor */
+        .premium-testimonials-v2 .t-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: auto;
+        }
+
+        /* Awatar w kolorze logo */
+        .premium-testimonials-v2 .t-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            background: var(--t-brand-color);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 10px 20px rgba(143, 109, 78, 0.2);
+        }
+
+        .premium-testimonials-v2 .t-info span {
+            display: block;
+        }
+
+        .premium-testimonials-v2 .t-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--t-text-dark);
+        }
+
+        .premium-testimonials-v2 .t-role {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* Animacja */
+        @keyframes t-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-100% - 30px)); }
+        }
+
+        /* Efekt zanikania bocznego */
+        .premium-testimonials-v2::before,
+        .premium-testimonials-v2::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .premium-testimonials-v2::before { left: 0; background: linear-gradient(to right, white, transparent); }
+        .premium-testimonials-v2::after { right: 0; background: linear-gradient(to left, white, transparent); }
+
+        @media (max-width: 768px) {
+            .premium-testimonials-v2 .t-header h2 { font-size: 2.2rem; }
+            .premium-testimonials-v2 .t-card { width: 320px; padding: 30px; }
+            .premium-testimonials-v2 { padding: 60px 0; }
+        }
+    </style>
+
+    <div class="t-header">
+        <p>Referencje</p>
+        <h2>Opinie naszych klientów</h2>
+    </div>
+
+    <div class="t-marquee-container">
+        <!-- Ścieżka 1 -->
+        <div class="t-marquee-track">
+            <!-- Karta 1 -->
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Niesamowita precyzja i wyczucie stylu. Współpraca z tym zespołem to gwarancja najwyższej jakości i dbałości o detale."</p>
+                <div class="t-author">
+                    <div class="t-avatar">JD</div>
+                    <div class="t-info">
+                        <span class="t-name">Jakub Dębski</span>
+                        <span class="t-role">CEO Luxury Group</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 2 -->
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Projekt przerosł moje oczekiwania pod kątem UX i estetyki. Prawdziwy Quiet Luxury w cyfrowym wydaniu."</p>
+                <div class="t-author">
+                    <div class="t-avatar">AK</div>
+                    <div class="t-info">
+                        <span class="t-name">Alicja Kowal</span>
+                        <span class="t-role">Art Director</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 3 -->
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Dostarczyli rozwiązanie, które odmieniło sposób, w jaki klienci postrzegają naszą markę. Pełna rekomendacja."</p>
+                <div class="t-author">
+                    <div class="t-avatar">MW</div>
+                    <div class="t-info">
+                        <span class="t-name">Michał Wolski</span>
+                        <span class="t-role">Founder Boutique</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 4 -->
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Profesjonalizm na każdym etapie. Od koncepcji po końcowe wdrożenie - wszystko przebiegło idealnie."</p>
+                <div class="t-author">
+                    <div class="t-avatar">SN</div>
+                    <div class="t-info">
+                        <span class="t-name">Sonia Nowak</span>
+                        <span class="t-role">Marketing Manager</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ścieżka 2 (Duplikat dla płynności) -->
+        <div class="t-marquee-track">
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Niesamowita precyzja i wyczucie stylu. Współpraca z tym zespołem to gwarancja najwyższej jakości i dbałości o detale."</p>
+                <div class="t-author">
+                    <div class="t-avatar">JD</div>
+                    <div class="t-info">
+                        <span class="t-name">Jakub Dębski</span>
+                        <span class="t-role">CEO Luxury Group</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Projekt przerosł moje oczekiwania pod kątem UX i estetyki. Prawdziwy Quiet Luxury w cyfrowym wydaniu."</p>
+                <div class="t-author">
+                    <div class="t-avatar">AK</div>
+                    <div class="t-info">
+                        <span class="t-name">Alicja Kowal</span>
+                        <span class="t-role">Art Director</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Dostarczyli rozwiązanie, które odmieniło sposób, w jaki klienci postrzegają naszą markę. Pełna rekomendacja."</p>
+                <div class="t-author">
+                    <div class="t-avatar">MW</div>
+                    <div class="t-info">
+                        <span class="t-name">Michał Wolski</span>
+                        <span class="t-role">Founder Boutique</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="t-card">
+                <div class="t-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <p class="t-quote">"Profesjonalizm na każdym etapie. Od koncepcji po końcowe wdrożenie - wszystko przebiegło idealnie."</p>
+                <div class="t-author">
+                    <div class="t-avatar">SN</div>
+                    <div class="t-info">
+                        <span class="t-name">Sonia Nowak</span>
+                        <span class="t-role">Marketing Manager</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- TESTIMONIALS SECTION END -->
 <!-- TESTIMONIALS SECTION END -->
 	<!-- Nowoczesny, szeroki komponent z efektem szkła - Integracja KwesForms -->
 <div class="contact-glass-wrapper">
@@ -1218,6 +1559,7 @@
 </body>
 
 </html>
+
 
 
 
