@@ -403,7 +403,8 @@
             --t-text-gray: #666666;
             
             font-family: 'Plus Jakarta Sans', sans-serif;
-            padding: 100px 0;
+            /* Usunięto padding z góry i z dołu (0 0 0 0), aby sekcja przylegała do sąsiadujących elementów */
+            padding: 0;
             background: transparent;
             overflow: hidden;
             position: relative;
@@ -415,6 +416,8 @@
             text-align: center;
             margin-bottom: 60px;
             padding: 0 20px;
+            /* Dodany margines od góry tylko dla treści, nie dla całej sekcji */
+            padding-top: 40px;
         }
 
         .premium-testimonials-v2 .t-header h2 {
@@ -440,6 +443,8 @@
             display: flex;
             user-select: none;
             gap: 30px;
+            /* Dodany margines na dole kontenera dla balansu wizualnego */
+            padding-bottom: 40px;
         }
 
         .premium-testimonials-v2 .t-marquee-track {
@@ -449,7 +454,7 @@
             justify-content: space-around;
             gap: 30px;
             min-width: 100%;
-            animation: t-scroll 30s linear infinite; /* Szybkość dostosowana do płynności */
+            animation: t-scroll 30s linear infinite;
         }
 
         /* Zatrzymanie po najechaniu */
@@ -565,7 +570,7 @@
         @media (max-width: 768px) {
             .premium-testimonials-v2 .t-header h2 { font-size: 2.2rem; }
             .premium-testimonials-v2 .t-card { width: 320px; padding: 30px; }
-            .premium-testimonials-v2 { padding: 60px 0; }
+            .premium-testimonials-v2 .t-header { padding-top: 20px; }
         }
     </style>
 
@@ -577,7 +582,6 @@
     <div class="t-marquee-container">
         <!-- Ścieżka 1 -->
         <div class="t-marquee-track">
-            <!-- Karta 1 -->
             <div class="t-card">
                 <div class="t-stars">
                     <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -596,7 +600,6 @@
                 </div>
             </div>
 
-            <!-- Karta 2 -->
             <div class="t-card">
                 <div class="t-stars">
                     <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -615,7 +618,6 @@
                 </div>
             </div>
 
-            <!-- Karta 3 -->
             <div class="t-card">
                 <div class="t-stars">
                     <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -634,7 +636,6 @@
                 </div>
             </div>
 
-            <!-- Karta 4 -->
             <div class="t-card">
                 <div class="t-stars">
                     <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -730,7 +731,6 @@
         </div>
     </div>
 </section>
-<!-- TESTIMONIALS SECTION END -->
 <!-- TESTIMONIALS SECTION END -->
 	<!-- Nowoczesny, szeroki komponent z efektem szkła - Integracja KwesForms -->
 <div class="contact-glass-wrapper">
@@ -1559,6 +1559,7 @@
 </body>
 
 </html>
+
 
 
 
