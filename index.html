@@ -198,7 +198,6 @@
         .b-outer {
             padding: 0 var(--p-side-mobile);
             width: 100%;
-            /* Zastosowanie marginesu z konfiguracji */
             margin: var(--m-top-mobile) auto 30px auto; 
             max-width: 1600px;
             box-sizing: border-box;
@@ -209,10 +208,9 @@
             height: var(--h-mobile);
             position: relative;
             overflow: hidden;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.15);
             width: 100%;
-            transition: height 0.3s ease;
         }
 
         @media (min-width: 1024px) {
@@ -222,7 +220,6 @@
             }
             .b-outer {
                 padding: 0 var(--p-side-desktop);
-                /* Zastosowanie marginesu dla komputerów */
                 margin: var(--m-top-desktop) auto 50px auto;
             }
         }
@@ -232,10 +229,10 @@
             inset: 0;
             display: flex;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 15px;
             opacity: 0;
             transform: scale(0.98);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
             width: 100%;
             box-sizing: border-box;
@@ -254,6 +251,7 @@
             }
         }
 
+        /* Przycisk - poprawiony na mobile */
         .b-btn {
             background-color: var(--b-accent);
             color: white;
@@ -266,24 +264,33 @@
             border-radius: 50px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            /* Ograniczenie wielkości na mobile */
+            font-size: 9px;
+            padding: 8px 14px;
+        }
+
+        @media (min-width: 1024px) {
+            .b-btn {
+                font-size: 1rem;
+                padding: 20px 50px;
+            }
         }
 
         .b-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(143, 109, 78, 0.3);
+            transform: translateY(-2px);
             filter: brightness(1.1);
         }
 
         .b-dot {
-            height: 6px;
+            height: 4px;
             border-radius: 10px;
-            background-color: rgba(74, 62, 52, 0.15);
+            background-color: rgba(74, 62, 52, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .b-dot.active {
-            width: 35px;
+            width: 25px;
             background-color: var(--b-accent);
         }
 
@@ -292,7 +299,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            gap: 20px;
+            gap: 10px;
         }
 
         .b-text-section {
@@ -300,28 +307,44 @@
             flex-direction: column;
             justify-content: center;
             min-width: 0;
+            flex: 1;
         }
 
-        /* Stylizacja napisów na PC */
+        /* Tekst opisu na mobile */
+        .b-desc-mobile {
+            display: block;
+            font-size: 9px;
+            line-height: 1.2;
+            margin-top: 2px;
+            opacity: 0.8;
+            color: var(--b-muted);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
         @media (min-width: 1024px) {
+            .b-desc-mobile {
+                display: none; /* Ukrywamy mały opis na PC */
+            }
             .b-title {
                 font-size: 3.5rem !important;
-                margin-bottom: 15px;
-            }
-            .b-subtitle {
-                font-size: 1rem !important;
-                letter-spacing: 0.4em !important;
                 margin-bottom: 10px;
             }
-            .b-desc {
-                font-size: 1.1rem !important;
+            .b-desc-pc {
+                display: block !important;
+                font-size: 1.1rem;
                 max-width: 600px;
                 line-height: 1.6;
-                display: block !important;
+                margin-top: 15px;
+                color: var(--b-muted);
             }
-            .b-btn {
-                font-size: 1rem !important;
-                padding: 20px 50px !important;
+        }
+
+        @media (max-width: 1023px) {
+            .b-desc-pc {
+                display: none;
             }
         }
     </style>
@@ -333,18 +356,19 @@
             <div class="b-slide active" data-index="0">
                 <div class="b-content-box">
                     <div class="b-text-section">
-                        <span class="b-subtitle text-[8px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-1" style="color: var(--b-accent);">
+                        <span class="text-[7px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-0.5" style="color: var(--b-accent);">
                             
                         </span>
-                        <h2 class="b-title text-[15px] md:text-4xl font-extrabold leading-tight" style="color: var(--b-text);">
+                        <h2 class="b-title text-[14px] md:text-4xl font-extrabold leading-tight" style="color: var(--b-text);">
                             Zamów druk 3D
                         </h2>
-                        <p class="b-desc hidden text-sm font-medium mt-3 opacity-80" style="color: var(--b-muted);">
-                            Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.
-                        </p>
+                        <!-- Opis na mobile -->
+                        <p class="b-desc-mobile">Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.</p>
+                        <!-- Opis na PC -->
+                        <p class="b-desc-pc hidden">Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.</p>
                     </div>
-                    <button class="b-btn text-[9px] md:text-sm py-2 px-5 md:py-4 md:px-12 shadow-lg flex items-center gap-2">
-                        Skontaktuj się z nami <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+                    <button class="b-btn shadow-lg flex items-center gap-1.5">
+                        Skontaktuj się z nami <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
                     </button>
                 </div>
             </div>
@@ -353,34 +377,33 @@
             <div class="b-slide" data-index="1">
                 <div class="b-content-box">
                     <div class="b-text-section">
-                        <span class="b-subtitle text-[8px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-1" style="color: var(--b-accent);">
+                        <span class="text-[7px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-0.5" style="color: var(--b-accent);">
                             OFERTA LIMITOWANA
                         </span>
-                        <h2 class="b-title text-[15px] md:text-4xl font-extrabold leading-tight" style="color: var(--b-text);">
+                        <h2 class="b-title text-[14px] md:text-4xl font-extrabold leading-tight" style="color: var(--b-text);">
                             ELEGANCJA W DETALU
                         </h2>
-                        <p class="b-desc hidden text-sm font-medium mt-3 opacity-80" style="color: var(--b-muted);">
-                            Ponadczasowy design spotyka się z najwyższą jakością wykonania. Sprawdź nasze bestsellery w nowych kolorach.
-                        </p>
+                        <p class="b-desc-mobile">Ponadczasowy design spotyka się z najwyższą jakością.</p>
+                        <p class="b-desc-pc hidden">Sprawdź nasze bestsellery w nowych kolorach. Każdy element został zaprojektowany z myślą o najbardziej wymagających wnętrzach.</p>
                     </div>
-                    <button class="b-btn text-[9px] md:text-sm py-2 px-5 md:py-4 md:px-12 shadow-lg flex items-center gap-2">
-                        Sprawdź ofertę <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+                    <button class="b-btn shadow-lg flex items-center gap-1.5">
+                        Sprawdź <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Nawigacja boczna (widoczna na PC) -->
-            <button onclick="moveSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 opacity-10 hover:opacity-100 transition-all hover:scale-110" style="color: var(--b-accent); background: none; border: none; cursor: pointer;">
-                <i data-lucide="chevron-left" class="w-8 h-8 md:w-12 md:h-12"></i>
+            <button onclick="moveSlide(-1)" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 opacity-5 md:opacity-10 hover:opacity-100 transition-all" style="color: var(--b-accent); background: none; border: none; cursor: pointer;">
+                <i data-lucide="chevron-left" class="w-5 h-5 md:w-12 md:h-12"></i>
             </button>
-            <button onclick="moveSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 opacity-10 hover:opacity-100 transition-all hover:scale-110" style="color: var(--b-accent); background: none; border: none; cursor: pointer;">
-                <i data-lucide="chevron-right" class="w-8 h-8 md:w-12 md:h-12"></i>
+            <button onclick="moveSlide(1)" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2 opacity-5 md:opacity-10 hover:opacity-100 transition-all" style="color: var(--b-accent); background: none; border: none; cursor: pointer;">
+                <i data-lucide="chevron-right" class="w-5 h-5 md:w-12 md:h-12"></i>
             </button>
 
             <!-- Kropki -->
-            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3" id="b-dots">
-                <div class="b-dot active" style="width: 35px;" onclick="setSlide(0)"></div>
-                <div class="b-dot" style="width: 10px;" onclick="setSlide(1)"></div>
+            <div class="absolute bottom-3 md:bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                <div class="b-dot active" style="width: 25px;" onclick="setSlide(0)"></div>
+                <div class="b-dot" style="width: 8px;" onclick="setSlide(1)"></div>
             </div>
         </div>
     </div>
@@ -409,7 +432,7 @@
                     slides.forEach((s, i) => {
                         s.classList.toggle('active', i === current);
                         dots[i].classList.toggle('active', i === current);
-                        dots[i].style.width = i === current ? '35px' : '10px';
+                        dots[i].style.width = i === current ? (window.innerWidth > 1024 ? '35px' : '25px') : '8px';
                     });
                 }
 
@@ -1830,6 +1853,7 @@
 </body>
 
 </html>
+
 
 
 
