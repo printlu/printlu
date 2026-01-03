@@ -143,26 +143,9 @@
 			</ul>
 		</div>
 	</div>
-
-	<header id="header">
-		<div class="header-wrap" data-aos="fade">
-			<div class="main-logo">
-				<a href="index.html"><img src="images/logo323224343 (1) (1).png" title="Printlu.pl"></a>
-			</div><!--main-logo-->
-
-			<nav id="navbar">
-				<input id="menu-toggle" type="checkbox" />
-				<label class="menu-btn" for="menu-toggle">
-					<span></span>
-				</label>
-			</nav>
-
-		</div><!--header-wrap-->
-	</header>
-<!-- Start Komponentu Baner Printlu Full Width -->
+<!-- Start Komponentu Baner Printlu Slim Geometric z Logo -->
 <div id="printlu-banner-root">
     <style>
-        /* Usuwamy marginesy z body, aby baner dotykał krawędzi strony */
         body {
             margin: 0 !important;
             padding: 0 !important;
@@ -176,6 +159,7 @@
             width: 100%;
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
 
         #printlu-banner-root .full-banner {
@@ -183,74 +167,131 @@
             color: var(--brand-color);
             position: relative;
             width: 100%;
-            /* Kompaktowa wysokość */
-            min-height: 320px; 
+            min-height: 380px; 
             display: flex;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            justify-content: flex-start;
             border-radius: 0;
         }
 
-        /* Animacja pojawiania się */
-        #printlu-banner-root .reveal {
-            opacity: 0;
-            transform: translateY(10px);
-            animation: printluReveal 0.8s ease-out forwards;
+        /* Kontener na pasy */
+        #printlu-banner-root .bg-lines-container {
+            position: absolute;
+            top: 0;
+            right: 0%;
+            width: 55%;
+            height: 100%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+            pointer-events: none;
+            z-index: 1;
         }
 
-        @keyframes printluReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        /* Animacje synchroniczne */
+        @keyframes subtleEntry {
+            0% { 
+                opacity: 0; 
+                transform: translateX(-20px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(0); 
             }
         }
 
-        /* Styl przycisku */
+        @keyframes subtleLineEntry {
+            0% { 
+                opacity: 0; 
+                transform: rotate(25deg) translateY(-20%) translateX(-20px); 
+            }
+            100% { 
+                opacity: 0.1; 
+                transform: rotate(25deg) translateY(-20%) translateX(0); 
+            }
+        }
+
+        #printlu-banner-root .bg-line {
+            width: 45px;
+            height: 180%;
+            background-color: var(--brand-color);
+            opacity: 0;
+            animation: subtleLineEntry 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        #printlu-banner-root .stagger {
+            opacity: 0;
+            animation: subtleEntry 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* Stylizacja Logo - Zoptymalizowana pod kątem ostrości */
+        #printlu-banner-root .logo-container {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        #printlu-banner-root .logo-placeholder {
+            height: 50px; /* Tutaj możesz zwiększyć lub zmniejszyć logo */
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            /* Zapewnia wyższą ostrość dla plików PNG/JPG */
+            image-rendering: -webkit-optimize-contrast; 
+        }
+
+        /* Przycisk */
         #printlu-banner-root .contact-button {
+            position: relative;
             background-color: var(--brand-color);
             color: var(--btn-text);
-            border-radius: 999px;
-            transition: all 0.3s ease;
+            border-radius: 50px;
+            padding: 12px 42px;
             font-weight: 600;
-            font-size: 0.95rem;
-            padding: 14px 45px;
+            font-size: 0.85rem;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(143, 109, 78, 0.2);
-            border: 1px solid var(--brand-color);
+            transition: all 0.3s ease;
+            border: 1.5px solid var(--brand-color);
+            box-shadow: 0 5px 15px -5px rgba(143, 109, 78, 0.3);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         #printlu-banner-root .contact-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(143, 109, 78, 0.3);
             background-color: transparent;
             color: var(--brand-color);
+            box-shadow: 0 8px 20px -8px rgba(143, 109, 78, 0.2);
         }
 
-        /* Teksty */
+        /* Typografia */
         #printlu-banner-root .main-heading {
-            color: var(--brand-color);
+            font-weight: 200;
             line-height: 1.1;
-            font-weight: 400;
+            margin-bottom: 12px;
+            font-size: 2.2rem;
             letter-spacing: -0.02em;
-            margin: 0 0 10px 0;
-            font-size: 2.5rem;
+            text-align: left;
+            position: relative;
+            z-index: 2;
         }
 
         @media (min-width: 768px) {
-            #printlu-banner-root .main-heading {
-                font-size: 3.5rem;
-            }
+            #printlu-banner-root .main-heading { font-size: 3.5rem; }
         }
 
         #printlu-banner-root .description-text {
             font-weight: 300;
-            opacity: 0.9;
-            font-size: 1.1rem;
-            margin: 0 0 30px 0;
-            /* Tekst małymi literami */
+            opacity: 0.8;
+            font-size: 1rem;
+            margin-bottom: 35px;
+            max-width: 500px;
+            line-height: 1.5;
             text-transform: lowercase;
+            text-align: left;
+            position: relative;
+            z-index: 2;
         }
 
         #printlu-banner-root .description-text::first-letter {
@@ -258,37 +299,61 @@
         }
 
         #printlu-banner-root .content-wrapper {
-            max-width: 900px;
+            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
+            padding: 40px 60px;
+            z-index: 10;
+        }
+
+        /* Responsywność */
+        @media (max-width: 768px) {
+            #printlu-banner-root .bg-lines-container { width: 100%; opacity: 0.4; right: -15%; }
+            #printlu-banner-root .content-wrapper { padding: 40px 30px; text-align: center; }
+            #printlu-banner-root .main-heading, #printlu-banner-root .description-text, #printlu-banner-root .logo-container { 
+                text-align: center; 
+                justify-content: center;
+                margin-left: auto; 
+                margin-right: auto; 
+            }
         }
     </style>
 
-    <!-- Import czcionki Nunito -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600&display=swap" rel="stylesheet">
 
     <section class="full-banner">
-        <!-- Treść baneru -->
-        <div class="content-wrapper reveal">
-            <h1 class="main-heading">
-                Zamów druk 3D
+        <div class="bg-lines-container">
+            <div class="bg-line"></div>
+            <div class="bg-line"></div>
+            <div class="bg-line"></div>
+            <div class="bg-line"></div>
+            <div class="bg-line"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Miejsce na Twoje Logo -->
+            <div class="logo-container stagger">
+                <!-- Wstaw link do swojego pliku w src="" poniżej -->
+                <img src="https://via.placeholder.com/300x100/DBCBB8/8F6D4E?text=TWOJE+LOGO" alt="Logo Printlu" class="logo-placeholder">
+            </div>
+
+            <h1 class="main-heading stagger">
+                Zrealizuj swoje wizje<br>z Printlu
             </h1>
             
-            <p class="description-text">
-                Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.
+            <p class="description-text stagger">
+                tworzymy precyzyjne wydruki 3D dopasowane do twoich indywidualnych potrzeb
             </p>
 
-            <div>
-                <a href="https://printlu.pl/Kontakt.html" class="contact-button">
-                    Skontaktuj się z nami
+            <div class="stagger">
+                <a href="#kontakt" class="contact-button">
+                    Kontakt
                 </a>
             </div>
         </div>
     </section>
 </div>
-<!-- End Komponentu Baner Printlu Full Width -->
-
+<!-- End Komponentu Baner Printlu Slim Geometric -->
 <!-- 
   INSTRUKCJA DLA PRINTLU:
   1. DODAWANIE KROKÓW: Skopiuj blok oznaczony jako "POJEDYNCZY KROK" i wklej go poniżej ostatniego. Pamiętaj o zmianie numeru (01, 02...).
@@ -1694,6 +1759,7 @@
 </body>
 
 </html>
+
 
 
 
