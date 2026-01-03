@@ -174,7 +174,7 @@
 
     <style>
         /* ==========================================
-           KONFIGURACJA - TUTAJ ZMIENIAJ PIKSELE
+           KONFIGURACJA - TUTAJ ZMIENIAJ PIKSELE I LINKI
            ========================================== */
         :root {
             --b-bg: #DBCBB8;
@@ -185,6 +185,9 @@
             /* WYSOKOŚĆ BANERU */
             --h-mobile: 130px; 
             --h-desktop: 250px; 
+
+            /* SZEROKOŚĆ BANERU NA KOMPUTERZE */
+            --w-desktop-max: 1600px; 
             
             /* ODSTĘP OD GÓRY STRONY (MARGINES) */
             --m-top-mobile: 130px;
@@ -192,15 +195,18 @@
 
             /* ODSTĘPY BOCZNE (WEWNĄTRZ EKRANU) */
             --p-side-mobile: 15px;
-            --p-side-desktop: 15px;
+            --p-side-desktop: 40px;
         }
 
         .b-outer {
             padding: 0 var(--p-side-mobile);
             width: 100%;
             margin: var(--m-top-mobile) auto 30px auto; 
-            max-width: 1600px;
+            max-width: var(--w-desktop-max);
             box-sizing: border-box;
+            /* Ustawienie niskiego z-index, aby menu strony mogło zakryć baner */
+            position: relative;
+            z-index: 1;
         }
 
         .b-wrapper {
@@ -242,7 +248,7 @@
             opacity: 1;
             transform: scale(1);
             pointer-events: auto;
-            z-index: 10;
+            z-index: 5;
         }
 
         @media (min-width: 1024px) {
@@ -251,12 +257,15 @@
             }
         }
 
-        /* Przycisk - poprawiony na mobile */
+        /* Przycisk jako link <a> */
         .b-btn {
             background-color: var(--b-accent);
-            color: white;
+            color: white !important;
+            text-decoration: none !important;
             transition: all 0.3s ease;
-            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             white-space: nowrap;
             flex-shrink: 0;
@@ -264,7 +273,6 @@
             border-radius: 50px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            /* Ograniczenie wielkości na mobile */
             font-size: 9px;
             padding: 8px 14px;
         }
@@ -279,6 +287,7 @@
         .b-btn:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .b-dot {
@@ -310,7 +319,6 @@
             flex: 1;
         }
 
-        /* Tekst opisu na mobile */
         .b-desc-mobile {
             display: block;
             font-size: 9px;
@@ -326,7 +334,7 @@
 
         @media (min-width: 1024px) {
             .b-desc-mobile {
-                display: none; /* Ukrywamy mały opis na PC */
+                display: none;
             }
             .b-title {
                 font-size: 3.5rem !important;
@@ -357,19 +365,18 @@
                 <div class="b-content-box">
                     <div class="b-text-section">
                         <span class="text-[7px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-0.5" style="color: var(--b-accent);">
-                            
+                            NOWA KOLEKCJA 2026
                         </span>
                         <h2 class="b-title text-[14px] md:text-4xl font-extrabold leading-tight" style="color: var(--b-text);">
-                            Zamów druk 3D
+                            NATURALNA HARMONIA
                         </h2>
-                        <!-- Opis na mobile -->
-                        <p class="b-desc-mobile">Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.</p>
-                        <!-- Opis na PC -->
-                        <p class="b-desc-pc hidden">Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.</p>
+                        <p class="b-desc-mobile">Stwórz przestrzeń, która oddycha naturalnym spokojem.</p>
+                        <p class="b-desc-pc hidden">Wyjątkowe produkty wykonane z ekologicznych materiałów, które wprowadzą spokój do Twojego domu i sprawią, że poczujesz bliskość natury.</p>
                     </div>
-                    <button class="b-btn shadow-lg flex items-center gap-1.5">
-                        Sprawdź <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                    </button>
+                    <!-- LINK DLA SLAJDU 1 -->
+                    <a href="https://printlu.pl/Kontakt.html" class="b-btn shadow-lg gap-1.5">
+                        Odkryj <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                    </a>
                 </div>
             </div>
 
@@ -386,13 +393,14 @@
                         <p class="b-desc-mobile">Ponadczasowy design spotyka się z najwyższą jakością.</p>
                         <p class="b-desc-pc hidden">Sprawdź nasze bestsellery w nowych kolorach. Każdy element został zaprojektowany z myślą o najbardziej wymagających wnętrzach.</p>
                     </div>
-                    <button class="b-btn shadow-lg flex items-center gap-1.5">
+                    <!-- LINK DLA SLAJDU 2 -->
+                    <a href="https://twoja-strona.pl/link2" class="b-btn shadow-lg gap-1.5">
                         Sprawdź <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
 
-            <!-- Nawigacja boczna (widoczna na PC) -->
+            <!-- Nawigacja boczna -->
             <button onclick="moveSlide(-1)" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 opacity-5 md:opacity-10 hover:opacity-100 transition-all" style="color: var(--b-accent); background: none; border: none; cursor: pointer;">
                 <i data-lucide="chevron-left" class="w-5 h-5 md:w-12 md:h-12"></i>
             </button>
@@ -1853,6 +1861,7 @@
 </body>
 
 </html>
+
 
 
 
