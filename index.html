@@ -167,7 +167,7 @@
 <section>
 <!-- POCZĄTEK ELEMENTU BANERU -->
 <div id="moj-smukly-baner-kontener" style="font-family: 'Montserrat', sans-serif;">
-    <!-- Import czcionki i ikon (możesz to przenieść do sekcji head swojej strony, jeśli chcesz) -->
+    <!-- Import czcionki i ikon -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -180,24 +180,34 @@
             --text-muted: #6B5A4D;
         }
 
+        .banner-outer-padding {
+            padding: 0 0.75rem;
+            width: 100%;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .banner-wrapper {
             background-color: #DBCBB8;
-            height: 220px;
+            height: 130px;
             position: relative;
             overflow: hidden;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             width: 100%;
-            /* ZMIANA: margin-top ustawia odstęp od góry strony (np. od menu) */
-            margin-top: 140px; 
+            margin-top: 40px; 
             margin-bottom: 20px;
         }
 
         @media (min-width: 768px) {
             .banner-wrapper {
-                height: 280px;
-                /* Większy odstęp na komputerach, jeśli menu jest wyższe */
-                margin-top: 140px; 
+                height: 130px;
+                margin-top: 60px; 
+                border-radius: 1.5rem;
+            }
+            .banner-outer-padding {
+                padding: 0 2rem;
             }
         }
 
@@ -206,10 +216,10 @@
             inset: 0;
             display: flex;
             align-items: center;
-            padding: 0 2rem;
+            padding: 0 1rem;
             opacity: 0;
-            transform: translateX(20px);
-            transition: all 0.8s ease-in-out;
+            transform: translateX(15px);
+            transition: all 0.6s ease-in-out;
             pointer-events: none;
         }
 
@@ -222,7 +232,7 @@
 
         @media (min-width: 768px) {
             .custom-slide {
-                padding: 0 5rem;
+                padding: 0 4rem;
             }
         }
 
@@ -232,15 +242,17 @@
             transition: all 0.2s;
             border: none;
             cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .btn-custom:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
+            transform: scale(1.03);
+            filter: brightness(1.05);
         }
 
         .custom-dot {
-            height: 6px;
+            height: 4px;
             border-radius: 999px;
             background-color: rgba(143, 109, 78, 0.2);
             transition: all 0.3s;
@@ -248,67 +260,88 @@
         }
 
         .custom-dot.active {
-            width: 24px;
+            width: 18px;
             background-color: #8F6D4E;
+        }
+
+        /* Ulepszona obsługa tekstu na małych ekranach */
+        .slide-content-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 12px;
+        }
+
+        .text-section {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
     </style>
 
-    <div class="banner-wrapper" id="main-banner-element">
-        
-        <!-- Slajd 1 -->
-        <div class="custom-slide active" id="slide-0">
-            <div class="max-w-xl">
-                <span class="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase block mb-1" style="color: #8F6D4E;">
-                    NOWOŚĆ W OFERCIE
-                </span>
-                <h2 class="text-xl md:text-3xl lg:text-4xl font-extrabold mb-2 leading-tight" style="color: #4A3E34;">
-                    NATURALNA KOLEKCJA
-                </h2>
-                <p class="hidden md:block text-sm mb-5 font-medium leading-snug max-w-md" style="color: #6B5A4D;">
-                    Odkryj harmonię kolorów ziemi w Twoim domu. Wyjątkowe produkty stworzone z myślą o Tobie.
-                </p>
-                <button class="btn-custom text-xs md:text-sm font-bold py-2.5 px-8 rounded-full flex items-center gap-2 shadow-md">
-                    Sprawdź kolekcję <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
-                </button>
+    <div class="banner-outer-padding">
+        <div class="banner-wrapper" id="main-banner-element">
+            
+            <!-- Slajd 1 -->
+            <div class="custom-slide active" id="slide-0">
+                <div class="slide-content-box">
+                    <div class="text-section">
+                        <span class="text-[8px] md:text-[10px] font-bold tracking-[0.2em] uppercase block mb-0.5" style="color: #8F6D4E;">
+                            Zamów druk 3D
+                        </span>
+                        <h2 class="text-[14px] md:text-xl lg:text-2xl font-extrabold leading-tight truncate" style="color: #4A3E34;">
+                            NATURALNA KOLEKCJA
+                        </h2>
+                        <p class="text-[10px] md:text-xs font-medium mt-0.5 line-clamp-1 opacity-90" style="color: #6B5A4D;">
+                            Odkryj harmonię kolorów ziemi.
+                        </p>
+                    </div>
+                    <button class="btn-custom text-[9px] md:text-xs font-bold py-2 px-4 md:py-2.5 md:px-6 rounded-full flex items-center gap-1.5 shadow-md">
+                        Skontaktuj się z nami <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <!-- Slajd 2 -->
-        <div class="custom-slide" id="slide-1">
-            <div class="max-w-xl">
-                <span class="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase block mb-1" style="color: #8F6D4E;">
-                    EDYCJA LIMITOWANA
-                </span>
-                <h2 class="text-xl md:text-3xl lg:text-4xl font-extrabold mb-2 leading-tight" style="color: #4A3E34;">
-                    ELEGANCJA I STYL
-                </h2>
-                <p class="hidden md:block text-sm mb-5 font-medium leading-snug max-w-md" style="color: #6B5A4D;">
-                    Ponadczasowy design, który zachwyca prostotą. Zamów już dziś z darmową dostawą.
-                </p>
-                <button class="btn-custom text-xs md:text-sm font-bold py-2.5 px-8 rounded-full flex items-center gap-2 shadow-md">
-                    Kup teraz <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
-                </button>
+            <!-- Slajd 2 -->
+            <div class="custom-slide" id="slide-1">
+                <div class="slide-content-box">
+                    <div class="text-section">
+                        <span class="text-[8px] md:text-[10px] font-bold tracking-[0.2em] uppercase block mb-0.5" style="color: #8F6D4E;">
+                            Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.
+                        </span>
+                        <h2 class="text-[14px] md:text-xl lg:text-2xl font-extrabold leading-tight truncate" style="color: #4A3E34;">
+                            ELEGANCJA I STYL
+                        </h2>
+                        <p class="text-[10px] md:text-xs font-medium mt-0.5 line-clamp-1 opacity-90" style="color: #6B5A4D;">
+                            Ponadczasowy design dla Ciebie.
+                        </p>
+                    </div>
+                    <button class="btn-custom text-[9px] md:text-xs font-bold py-2 px-4 md:py-2.5 md:px-6 rounded-full flex items-center gap-1.5 shadow-md">
+                        Kup teraz <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <!-- Przyciski nawigacji -->
-        <button onclick="changeSlide(-1)" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 opacity-30 hover:opacity-100 transition-opacity" style="color: #8F6D4E; background: none; border: none; cursor: pointer;">
-            <i data-lucide="chevron-left" style="width: 32px; height: 32px;"></i>
-        </button>
-        <button onclick="changeSlide(1)" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2 opacity-30 hover:opacity-100 transition-opacity" style="color: #8F6D4E; background: none; border: none; cursor: pointer;">
-            <i data-lucide="chevron-right" style="width: 32px; height: 32px;"></i>
-        </button>
+            <!-- Przyciski nawigacji (dyskretniejsze na mobile) -->
+            <button onclick="changeSlide(-1)" class="absolute left-1 top-1/2 -translate-y-1/2 z-20 p-1 opacity-10 hover:opacity-100 transition-opacity" style="color: #8F6D4E; background: none; border: none; cursor: pointer;">
+                <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+            </button>
+            <button onclick="changeSlide(1)" class="absolute right-1 top-1/2 -translate-y-1/2 z-20 p-1 opacity-10 hover:opacity-100 transition-opacity" style="color: #8F6D4E; background: none; border: none; cursor: pointer;">
+                <i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i>
+            </button>
 
-        <!-- Kropki podglądu -->
-        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-            <div class="custom-dot active" onclick="jumpToSlide(0)" id="dot-0" style="width: 24px;"></div>
-            <div class="custom-dot" onclick="jumpToSlide(1)" id="dot-1" style="width: 6px;"></div>
+            <!-- Kropki podglądu -->
+            <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
+                <div class="custom-dot active" onclick="jumpToSlide(0)" id="dot-0" style="width: 18px;"></div>
+                <div class="custom-dot" onclick="jumpToSlide(1)" id="dot-1" style="width: 6px;"></div>
+            </div>
         </div>
     </div>
 
     <script>
         (function() {
-            // Inicjalizacja ikon Lucide
             if (window.lucide) {
                 lucide.createIcons();
             }
@@ -332,11 +365,10 @@
                 slides.forEach((s, i) => {
                     s.classList.toggle('active', i === current);
                     dots[i].classList.toggle('active', i === current);
-                    dots[i].style.width = i === current ? '24px' : '6px';
+                    dots[i].style.width = i === current ? '18px' : '6px';
                 });
             }
 
-            // Automatyczna rotacja (10s)
             let timer = setInterval(() => changeSlide(1), 10000);
 
             const container = document.getElementById('main-banner-element');
@@ -1751,6 +1783,7 @@
 </body>
 
 </html>
+
 
 
 
