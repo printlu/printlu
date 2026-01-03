@@ -165,6 +165,183 @@
 		</div><!--header-wrap-->
 	</header>
 <section>
+	<!-- POCZĄTEK ELEMENTU BANERU -->
+<div id="moj-smukly-baner-kontener" style="font-family: 'Montserrat', sans-serif;">
+    <!-- Import czcionki i ikon (możesz to przenieść do sekcji head swojej strony, jeśli chcesz) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        #moj-smukly-baner-kontener :root {
+            --bg-color: #DBCBB8;
+            --accent-color: #8F6D4E;
+            --text-main: #4A3E34;
+            --text-muted: #6B5A4D;
+        }
+
+        .banner-wrapper {
+            background-color: #DBCBB8;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 768px) {
+            .banner-wrapper {
+                height: 280px;
+            }
+        }
+
+        .custom-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.8s ease-in-out;
+            pointer-events: none;
+        }
+
+        .custom-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .custom-slide {
+                padding: 0 5rem;
+            }
+        }
+
+        .btn-custom {
+            background-color: #8F6D4E;
+            color: white;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-custom:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .custom-dot {
+            height: 6px;
+            border-radius: 999px;
+            background-color: rgba(143, 109, 78, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .custom-dot.active {
+            width: 24px;
+            background-color: #8F6D4E;
+        }
+    </style>
+
+    <div class="banner-wrapper" id="main-banner-element">
+        
+        <!-- Slajd 1 -->
+        <div class="custom-slide active" id="slide-0">
+            <div class="max-w-xl">
+                <span class="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase block mb-1" style="color: #8F6D4E;">
+                    NOWOŚĆ W OFERCIE
+                </span>
+                <h2 class="text-xl md:text-3xl lg:text-4xl font-extrabold mb-2 leading-tight" style="color: #4A3E34;">
+                    NATURALNA KOLEKCJA
+                </h2>
+                <p class="hidden md:block text-sm mb-5 font-medium leading-snug max-w-md" style="color: #6B5A4D;">
+                    Odkryj harmonię kolorów ziemi w Twoim domu. Wyjątkowe produkty stworzone z myślą o Tobie.
+                </p>
+                <button class="btn-custom text-xs md:text-sm font-bold py-2.5 px-8 rounded-full flex items-center gap-2 shadow-md">
+                    Sprawdź kolekcję <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Slajd 2 -->
+        <div class="custom-slide" id="slide-1">
+            <div class="max-w-xl">
+                <span class="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase block mb-1" style="color: #8F6D4E;">
+                    EDYCJA LIMITOWANA
+                </span>
+                <h2 class="text-xl md:text-3xl lg:text-4xl font-extrabold mb-2 leading-tight" style="color: #4A3E34;">
+                    ELEGANCJA I STYL
+                </h2>
+                <p class="hidden md:block text-sm mb-5 font-medium leading-snug max-w-md" style="color: #6B5A4D;">
+                    Ponadczasowy design, który zachwyca prostotą. Zamów już dziś z darmową dostawą.
+                </p>
+                <button class="btn-custom text-xs md:text-sm font-bold py-2.5 px-8 rounded-full flex items-center gap-2 shadow-md">
+                    Kup teraz <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Przyciski nawigacji -->
+        <button onclick="changeSlide(-1)" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 opacity-30 hover:opacity-100 transition-opacity" style="color: #8F6D4E; background: none; border: none; cursor: pointer;">
+            <i data-lucide="chevron-left" style="width: 32px; height: 32px;"></i>
+        </button>
+        <button onclick="changeSlide(1)" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2 opacity-30 hover:opacity-100 transition-opacity" style="color: #8F6D4E; background: none; border: none; cursor: pointer;">
+            <i data-lucide="chevron-right" style="width: 32px; height: 32px;"></i>
+        </button>
+
+        <!-- Kropki podglądu -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+            <div class="custom-dot active" onclick="jumpToSlide(0)" id="dot-0" style="width: 24px;"></div>
+            <div class="custom-dot" onclick="jumpToSlide(1)" id="dot-1" style="width: 6px;"></div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Inicjalizacja ikon Lucide
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            let current = 0;
+            const slides = document.querySelectorAll('.custom-slide');
+            const dots = document.querySelectorAll('.custom-dot');
+            const total = slides.length;
+
+            window.changeSlide = function(direction) {
+                current = (current + direction + total) % total;
+                render();
+            };
+
+            window.jumpToSlide = function(index) {
+                current = index;
+                render();
+            };
+
+            function render() {
+                slides.forEach((s, i) => {
+                    s.classList.toggle('active', i === current);
+                    dots[i].classList.toggle('active', i === current);
+                    dots[i].style.width = i === current ? '24px' : '6px';
+                });
+            }
+
+            // Automatyczna rotacja (10s)
+            let timer = setInterval(() => changeSlide(1), 10000);
+
+            const container = document.getElementById('main-banner-element');
+            container.addEventListener('mouseenter', () => clearInterval(timer));
+            container.addEventListener('mouseleave', () => timer = setInterval(() => changeSlide(1), 10000));
+        })();
+    </script>
+</div>
+<!-- KONIEC ELEMENTU BANERU -->
 <!-- 
   INSTRUKCJA DLA PRINTLU:
   1. DODAWANIE KROKÓW: Skopiuj blok oznaczony jako "POJEDYNCZY KROK" i wklej go poniżej ostatniego. Pamiętaj o zmianie numeru (01, 02...).
@@ -1570,6 +1747,7 @@
 </body>
 
 </html>
+
 
 
 
