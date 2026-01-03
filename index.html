@@ -166,214 +166,255 @@
 	</header>
 <section>
 <!-- POCZĄTEK ELEMENTU BANERU -->
-<div id="moj-smukly-baner-kontener" style="font-family: 'Montserrat', sans-serif;">
+<div id="moj-smukly-baner-kontener" style="font-family: 'Montserrat', sans-serif; width: 100%; overflow: hidden;">
     <!-- Import czcionki i ikon -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        #moj-smukly-baner-kontener :root {
-            --bg-color: #DBCBB8;
-            --accent-color: #8F6D4E;
-            --text-main: #4A3E34;
-            --text-muted: #6B5A4D;
+        /* ==========================================
+           KONFIGURACJA - TUTAJ ZMIENIAJ PIKSELE
+           ========================================== */
+        :root {
+            --b-bg: #DBCBB8;
+            --b-accent: #8F6D4E;
+            --b-text: #4A3E34;
+            --b-muted: #6B5A4D;
+            
+            /* WYSOKOŚĆ BANERU */
+            --h-mobile: 130px; 
+            --h-desktop: 450px; /* ZNACZNIE POWIĘKSZONE NA PC */
+            
+            /* ODSTĘPY BOCZNE */
+            --p-side-mobile: 15px;
+            --p-side-desktop: 40px;
         }
 
-        .banner-outer-padding {
-            padding: 0 0.75rem;
+        .b-outer {
+            padding: 0 var(--p-side-mobile);
             width: 100%;
-            max-width: 1280px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 30px auto; 
+            max-width: 1600px; /* Szeroki baner na PC */
+            box-sizing: border-box;
         }
 
-        .banner-wrapper {
-            background-color: #DBCBB8;
-            height: 130px;
+        .b-wrapper {
+            background-color: var(--b-bg);
+            height: var(--h-mobile);
             position: relative;
             overflow: hidden;
-            border-radius: 1.25rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.15);
             width: 100%;
-            margin-top: 40px; 
-            margin-bottom: 20px;
+            transition: height 0.3s ease;
         }
 
-        @media (min-width: 768px) {
-            .banner-wrapper {
-                height: 130px;
-                margin-top: 130px; 
-                border-radius: 1.5rem;
+        @media (min-width: 1024px) {
+            .b-wrapper {
+                height: var(--h-desktop);
+                border-radius: 40px;
             }
-            .banner-outer-padding {
-                padding: 0 2rem;
+            .b-outer {
+                padding: 0 var(--p-side-desktop);
+                margin: 50px auto;
             }
         }
 
-        .custom-slide {
+        .b-slide {
             position: absolute;
             inset: 0;
             display: flex;
             align-items: center;
-            padding: 0 1rem;
+            padding: 0 20px;
             opacity: 0;
-            transform: translateX(15px);
-            transition: all 0.6s ease-in-out;
+            transform: scale(0.98);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .custom-slide.active {
+        .b-slide.active {
             opacity: 1;
-            transform: translateX(0);
+            transform: scale(1);
             pointer-events: auto;
             z-index: 10;
         }
 
-        @media (min-width: 768px) {
-            .custom-slide {
-                padding: 0 4rem;
+        @media (min-width: 1024px) {
+            .b-slide {
+                padding: 0 100px;
             }
         }
 
-        .btn-custom {
-            background-color: #8F6D4E;
+        .b-btn {
+            background-color: var(--b-accent);
             color: white;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
             white-space: nowrap;
             flex-shrink: 0;
+            font-weight: 800;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .btn-custom:hover {
-            transform: scale(1.03);
-            filter: brightness(1.05);
+        .b-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(143, 109, 78, 0.3);
+            filter: brightness(1.1);
         }
 
-        .custom-dot {
-            height: 4px;
-            border-radius: 999px;
-            background-color: rgba(143, 109, 78, 0.2);
-            transition: all 0.3s;
+        .b-dot {
+            height: 6px;
+            border-radius: 10px;
+            background-color: rgba(74, 62, 52, 0.15);
+            transition: all 0.3s ease;
             cursor: pointer;
         }
 
-        .custom-dot.active {
-            width: 18px;
-            background-color: #8F6D4E;
+        .b-dot.active {
+            width: 35px;
+            background-color: var(--b-accent);
         }
 
-        /* Ulepszona obsługa tekstu na małych ekranach */
-        .slide-content-box {
+        .b-content-box {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            gap: 12px;
+            gap: 20px;
         }
 
-        .text-section {
-            overflow: hidden;
+        .b-text-section {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            min-width: 0;
+        }
+
+        /* Stylizacja napisów na PC */
+        @media (min-width: 1024px) {
+            .b-title {
+                font-size: 3.5rem !important;
+                margin-bottom: 15px;
+            }
+            .b-subtitle {
+                font-size: 1rem !important;
+                letter-spacing: 0.4em !important;
+                margin-bottom: 10px;
+            }
+            .b-desc {
+                font-size: 1.1rem !important;
+                max-width: 600px;
+                line-height: 1.6;
+                display: block !important;
+            }
+            .b-btn {
+                font-size: 1rem !important;
+                padding: 20px 50px !important;
+            }
         }
     </style>
 
-    <div class="banner-outer-padding">
-        <div class="banner-wrapper" id="main-banner-element">
+    <div class="b-outer">
+        <div class="b-wrapper" id="banner-main-el">
             
             <!-- Slajd 1 -->
-            <div class="custom-slide active" id="slide-0">
-                <div class="slide-content-box">
-                    <div class="text-section">
-                        <span class="text-[8px] md:text-[10px] font-bold tracking-[0.2em] uppercase block mb-0.5" style="color: #8F6D4E;">
-                            Zamów druk 3D
+            <div class="b-slide active" data-index="0">
+                <div class="b-content-box">
+                    <div class="b-text-section">
+                        <span class="b-subtitle text-[8px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-1" style="color: var(--b-accent);">
+                            NOWA KOLEKCJA 2026
                         </span>
-                        <h2 class="text-[14px] md:text-xl lg:text-2xl font-extrabold leading-tight truncate" style="color: #4A3E34;">
-                            NATURALNA KOLEKCJA
+                        <h2 class="b-title text-[15px] md:text-4xl font-extrabold leading-tight" style="color: var(--b-text);">
+                            NATURALNA HARMONIA
                         </h2>
-                        <p class="text-[10px] md:text-xs font-medium mt-0.5 line-clamp-1 opacity-90" style="color: #6B5A4D;">
-                            Odkryj harmonię kolorów ziemi.
+                        <p class="b-desc hidden text-sm font-medium mt-3 opacity-80" style="color: var(--b-muted);">
+                            Stwórz przestrzeń, która oddycha. Wyjątkowe produkty wykonane z ekologicznych materiałów, które wprowadzą spokój do Twojego domu.
                         </p>
                     </div>
-                    <button class="btn-custom text-[9px] md:text-xs font-bold py-2 px-4 md:py-2.5 md:px-6 rounded-full flex items-center gap-1.5 shadow-md">
-                        Skontaktuj się z nami <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                    <button class="b-btn text-[9px] md:text-sm py-2 px-5 md:py-4 md:px-12 shadow-lg flex items-center gap-2">
+                        Odkryj teraz <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Slajd 2 -->
-            <div class="custom-slide" id="slide-1">
-                <div class="slide-content-box">
-                    <div class="text-section">
-                        <span class="text-[8px] md:text-[10px] font-bold tracking-[0.2em] uppercase block mb-0.5" style="color: #8F6D4E;">
-                            Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.
+            <div class="b-slide" data-index="1">
+                <div class="b-content-box">
+                    <div class="b-text-section">
+                        <span class="b-subtitle text-[8px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-1" style="color: var(--b-accent);">
+                            OFERTA LIMITOWANA
                         </span>
-                        <h2 class="text-[14px] md:text-xl lg:text-2xl font-extrabold leading-tight truncate" style="color: #4A3E34;">
-                            ELEGANCJA I STYL
+                        <h2 class="b-title text-[15px] md:text-4xl font-extrabold leading-tight" style="color: var(--b-text);">
+                            ELEGANCJA W DETALU
                         </h2>
-                        <p class="text-[10px] md:text-xs font-medium mt-0.5 line-clamp-1 opacity-90" style="color: #6B5A4D;">
-                            Ponadczasowy design dla Ciebie.
+                        <p class="b-desc hidden text-sm font-medium mt-3 opacity-80" style="color: var(--b-muted);">
+                            Ponadczasowy design spotyka się z najwyższą jakością wykonania. Sprawdź nasze bestsellery w nowych kolorach.
                         </p>
                     </div>
-                    <button class="btn-custom text-[9px] md:text-xs font-bold py-2 px-4 md:py-2.5 md:px-6 rounded-full flex items-center gap-1.5 shadow-md">
-                        Kup teraz <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                    <button class="b-btn text-[9px] md:text-sm py-2 px-5 md:py-4 md:px-12 shadow-lg flex items-center gap-2">
+                        Sprawdź ofertę <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Przyciski nawigacji (dyskretniejsze na mobile) -->
-            <button onclick="changeSlide(-1)" class="absolute left-1 top-1/2 -translate-y-1/2 z-20 p-1 opacity-10 hover:opacity-100 transition-opacity" style="color: #8F6D4E; background: none; border: none; cursor: pointer;">
-                <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+            <!-- Nawigacja boczna (widoczna na PC) -->
+            <button onclick="moveSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 opacity-10 hover:opacity-100 transition-all hover:scale-110" style="color: var(--b-accent); background: none; border: none; cursor: pointer;">
+                <i data-lucide="chevron-left" class="w-8 h-8 md:w-12 md:h-12"></i>
             </button>
-            <button onclick="changeSlide(1)" class="absolute right-1 top-1/2 -translate-y-1/2 z-20 p-1 opacity-10 hover:opacity-100 transition-opacity" style="color: #8F6D4E; background: none; border: none; cursor: pointer;">
-                <i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i>
+            <button onclick="moveSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 opacity-10 hover:opacity-100 transition-all hover:scale-110" style="color: var(--b-accent); background: none; border: none; cursor: pointer;">
+                <i data-lucide="chevron-right" class="w-8 h-8 md:w-12 md:h-12"></i>
             </button>
 
-            <!-- Kropki podglądu -->
-            <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
-                <div class="custom-dot active" onclick="jumpToSlide(0)" id="dot-0" style="width: 18px;"></div>
-                <div class="custom-dot" onclick="jumpToSlide(1)" id="dot-1" style="width: 6px;"></div>
+            <!-- Kropki -->
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3" id="b-dots">
+                <div class="b-dot active" style="width: 35px;" onclick="setSlide(0)"></div>
+                <div class="b-dot" style="width: 10px;" onclick="setSlide(1)"></div>
             </div>
         </div>
     </div>
 
     <script>
         (function() {
-            if (window.lucide) {
-                lucide.createIcons();
+            function init() {
+                if (window.lucide) lucide.createIcons();
+                
+                let current = 0;
+                const slides = document.querySelectorAll('.b-slide');
+                const dots = document.querySelectorAll('.b-dot');
+                const total = slides.length;
+
+                window.moveSlide = function(n) {
+                    current = (current + n + total) % total;
+                    update();
+                };
+
+                window.setSlide = function(n) {
+                    current = n;
+                    update();
+                };
+
+                function update() {
+                    slides.forEach((s, i) => {
+                        s.classList.toggle('active', i === current);
+                        dots[i].classList.toggle('active', i === current);
+                        dots[i].style.width = i === current ? '35px' : '10px';
+                    });
+                }
+
+                let auto = setInterval(() => moveSlide(1), 8000);
+                const el = document.getElementById('banner-main-el');
+                el.onmouseenter = () => clearInterval(auto);
+                el.onmouseleave = () => auto = setInterval(() => moveSlide(1), 8000);
             }
 
-            let current = 0;
-            const slides = document.querySelectorAll('.custom-slide');
-            const dots = document.querySelectorAll('.custom-dot');
-            const total = slides.length;
-
-            window.changeSlide = function(direction) {
-                current = (current + direction + total) % total;
-                render();
-            };
-
-            window.jumpToSlide = function(index) {
-                current = index;
-                render();
-            };
-
-            function render() {
-                slides.forEach((s, i) => {
-                    s.classList.toggle('active', i === current);
-                    dots[i].classList.toggle('active', i === current);
-                    dots[i].style.width = i === current ? '18px' : '6px';
-                });
-            }
-
-            let timer = setInterval(() => changeSlide(1), 10000);
-
-            const container = document.getElementById('main-banner-element');
-            container.addEventListener('mouseenter', () => clearInterval(timer));
-            container.addEventListener('mouseleave', () => timer = setInterval(() => changeSlide(1), 10000));
+            if (document.readyState === 'complete') init();
+            else window.addEventListener('load', init);
         })();
     </script>
 </div>
@@ -1783,6 +1824,7 @@
 </body>
 
 </html>
+
 
 
 
