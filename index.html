@@ -168,7 +168,7 @@
 <!-- POCZĄTEK ELEMENTU BANERU -->
 <div id="moj-smukly-baner-kontener" style="font-family: 'Montserrat', sans-serif; width: 100%; overflow: hidden;">
     <!-- Import czcionki i ikon -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -184,9 +184,13 @@
             
             /* WYSOKOŚĆ BANERU */
             --h-mobile: 130px; 
-            --h-desktop: 450px; /* ZNACZNIE POWIĘKSZONE NA PC */
+            --h-desktop: 450px; 
             
-            /* ODSTĘPY BOCZNE */
+            /* ODSTĘP OD GÓRY STRONY (MARGINES) */
+            --m-top-mobile: 100px;
+            --m-top-desktop: 130px;
+
+            /* ODSTĘPY BOCZNE (WEWNĄTRZ EKRANU) */
             --p-side-mobile: 15px;
             --p-side-desktop: 40px;
         }
@@ -194,8 +198,9 @@
         .b-outer {
             padding: 0 var(--p-side-mobile);
             width: 100%;
-            margin: 30px auto; 
-            max-width: 1600px; /* Szeroki baner na PC */
+            /* Zastosowanie marginesu z konfiguracji */
+            margin: var(--m-top-mobile) auto 30px auto; 
+            max-width: 1600px;
             box-sizing: border-box;
         }
 
@@ -217,7 +222,8 @@
             }
             .b-outer {
                 padding: 0 var(--p-side-desktop);
-                margin: 50px auto;
+                /* Zastosowanie marginesu dla komputerów */
+                margin: var(--m-top-desktop) auto 50px auto;
             }
         }
 
@@ -1824,6 +1830,7 @@
 </body>
 
 </html>
+
 
 
 
