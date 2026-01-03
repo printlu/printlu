@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -160,232 +159,22 @@
 
 		</div><!--header-wrap-->
 	</header>
-<!-- Start Komponentu Baner Printlu Slim Geometric Full Width & Top -->
-<div id="printlu-banner-root">
-    <style>
-        /* Resetowanie domyślnych marginesów strony, które mogą blokować baner przed dotknięciem góry */
-        :host, :root { display: block; }
-        
-        #printlu-banner-root {
-            --banner-bg: #DBCBB8;
-            --brand-color: #8F6D4E;
-            --btn-text: #DBCBB8;
-            font-family: 'Nunito', sans-serif;
-            width: 100vw;
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow: hidden;
-            display: block;
-            position: absolute; /* Wymuszenie pozycji względem góry */
-            top: 0;
-            left: 0;
-            z-index: 9999; /* Wysoki priorytet, by był na samym wierzchu */
-        }
 
-        /* Dodatkowy reset dla body, jeśli kod jest wklejany bezpośrednio */
-        html, body {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        #printlu-banner-root .full-banner {
-            background-color: var(--banner-bg);
-            color: var(--brand-color);
-            position: relative;
-            width: 100%;
-            min-height: 380px; 
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            border-radius: 0 !important; 
-            box-sizing: border-box;
-            margin: 0;
-            padding-top: 20px;
-        }
-
-        /* Kontener na pasy */
-        #printlu-banner-root .bg-lines-container {
-            position: absolute;
-            top: 0;
-            right: 0%;
-            width: 55%;
-            height: 100%;
-            display: flex;
-            justify-content: flex-end;
-            gap: 30px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Animacje synchroniczne */
-        @keyframes subtleEntry {
-            0% { 
-                opacity: 0; 
-                transform: translateX(-20px); 
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateX(0); 
-            }
-        }
-
-        @keyframes subtleLineEntry {
-            0% { 
-                opacity: 0; 
-                transform: rotate(25deg) translateY(-20%) translateX(-20px); 
-            }
-            100% { 
-                opacity: 0.1; 
-                transform: rotate(25deg) translateY(-20%) translateX(0); 
-            }
-        }
-
-        #printlu-banner-root .bg-line {
-            width: 45px;
-            height: 180%;
-            background-color: var(--brand-color);
-            opacity: 0;
-            animation: subtleLineEntry 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-
-        #printlu-banner-root .stagger {
-            opacity: 0;
-            animation: subtleEntry 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-
-        /* Stylizacja Logo */
-        #printlu-banner-root .logo-container {
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        #printlu-banner-root .logo-placeholder {
-            height: 50px; 
-            width: auto;
-            max-width: 220px;
-            object-fit: contain;
-            image-rendering: -webkit-optimize-contrast; 
-        }
-
-        /* Przycisk */
-        #printlu-banner-root .contact-button {
-            position: relative;
-            background-color: var(--brand-color);
-            color: var(--btn-text);
-            border-radius: 50px;
-            padding: 12px 42px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            border: 1.5px solid var(--brand-color);
-            box-shadow: 0 5px 15px -5px rgba(143, 109, 78, 0.3);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        #printlu-banner-root .contact-button:hover {
-            transform: translateY(-2px);
-            background-color: transparent;
-            color: var(--brand-color);
-            box-shadow: 0 8px 20px -8px rgba(143, 109, 78, 0.2);
-        }
-
-        /* Typografia */
-        #printlu-banner-root .main-heading {
-            font-weight: 200;
-            line-height: 1.1;
-            margin: 0 0 12px 0;
-            font-size: 2.2rem;
-            letter-spacing: -0.02em;
-            text-align: left;
-            position: relative;
-            z-index: 2;
-        }
-
-        @media (min-width: 768px) {
-            #printlu-banner-root .main-heading { font-size: 3.5rem; }
-        }
-
-        #printlu-banner-root .description-text {
-            font-weight: 300;
-            opacity: 0.8;
-            font-size: 1rem;
-            margin: 0 0 35px 0;
-            max-width: 500px;
-            line-height: 1.5;
-            text-transform: lowercase;
-            text-align: left;
-            position: relative;
-            z-index: 2;
-        }
-
-        #printlu-banner-root .description-text::first-letter {
-            text-transform: uppercase;
-        }
-
-        #printlu-banner-root .content-wrapper {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 40px 60px;
-            z-index: 10;
-            box-sizing: border-box;
-        }
-
-        /* Responsywność */
-        @media (max-width: 768px) {
-            #printlu-banner-root {
-                position: relative; /* Na komórkach lepiej wrócić do standardu, by nie zakryć menu */
-            }
-            #printlu-banner-root .bg-lines-container { width: 100%; opacity: 0.4; right: -15%; }
-            #printlu-banner-root .content-wrapper { padding: 40px 30px; text-align: center; }
-            #printlu-banner-root .main-heading, #printlu-banner-root .description-text, #printlu-banner-root .logo-container { 
-                text-align: center; 
-                justify-content: center;
-                margin-left: auto; 
-                margin-right: auto; 
-            }
-        }
-    </style>
-
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600&display=swap" rel="stylesheet">
-
-    <section class="full-banner">
-        <div class="bg-lines-container">
-            <div class="bg-line"></div>
-            <div class="bg-line"></div>
-            <div class="bg-line"></div>
-            <div class="bg-line"></div>
-            <div class="bg-line"></div>
-        </div>
-
-        <div class="content-wrapper">
-            <div class="logo-container stagger">
-                <!-- Tutaj wstaw swoje logo -->
-                <img src="https://raw.githubusercontent.com/printlu/printlu/refs/heads/main/images/Gemini_Generated_Image_qfpa39qfpa39qfpa%20(1).svg" alt="Logo Printlu" class="logo-placeholder">
-            </div>
-
-            <h1 class="main-heading stagger">
-                 Zamów druk 3D<br>
-            </h1>
-            
-            <p class="description-text stagger">
-                Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.
-            </p>
-
-            <div class="stagger">
-                <a href="#kontakt" class="contact-button">
-                    Skontaktuj się z nami
-                </a>
-            </div>
-        </div>
-    </section>
-</div>
-<!-- End Komponentu Baner Printlu Slim Geometric -->
-<!-- End Komponentu Baner Printlu Full Width -->
+	<section id="billboard" class="jarallax bg-secondary">
+		<div class="container-lg">
+			<div class="row align-items-end">
+				<div class="col-lg-6" data-aos="zoom-in-up">
+					<div class="banner-content">
+						<div class="banner-header">
+							<h2 class="display-1"><br />Zamów druk 3D</h2>
+							<p class="fs-5">Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.</p>
+							<a href="#" class="btn btn-primary btn-large">Skontaktuj się z nami</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 <!-- 
   INSTRUKCJA DLA PRINTLU:
@@ -1792,10 +1581,6 @@
 </body>
 
 </html>
-
-
-
-
 
 
 
