@@ -159,26 +159,135 @@
 
 		</div><!--header-wrap-->
 	</header>
+<!-- Start Komponentu Baner Printlu Full Width -->
+<div id="printlu-banner-root">
+    <style>
+        /* Usuwamy marginesy z body, aby baner dotykał krawędzi strony */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
 
-	<section id="billboard" class="jarallax bg-secondary">
-		<div class="container-lg">
-			<div class="row align-items-end">
-				<div class="col-lg-6" data-aos="zoom-in-up">
-					<div class="banner-content">
-						<div class="banner-header">
-							<h2 class="display-1"><br />Zamów druk 3D</h2>
-							<p class="fs-5">Masz gotowy model? Wydrukujemy go dla Ciebie. 
-								Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.</p>
-							<a href="https://printlu.pl/Kontakt.html" class="btn btn-primary btn-large">Skontaktuj się z nami</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6" data-aos="zoom-in-up">
-					<img src="images/" alt="Banner" class="img-fluid">
-				</div>
-			</div>
-		</div>
-	</section>
+        #printlu-banner-root {
+            --banner-bg: #DBCBB8;
+            --brand-color: #8F6D4E;
+            --btn-text: #DBCBB8;
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #printlu-banner-root .full-banner {
+            background-color: var(--banner-bg);
+            color: var(--brand-color);
+            position: relative;
+            width: 100%;
+            /* Kompaktowa wysokość */
+            min-height: 320px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 0;
+        }
+
+        /* Animacja pojawiania się */
+        #printlu-banner-root .reveal {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: printluReveal 0.8s ease-out forwards;
+        }
+
+        @keyframes printluReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Styl przycisku */
+        #printlu-banner-root .contact-button {
+            background-color: var(--brand-color);
+            color: var(--btn-text);
+            border-radius: 999px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 14px 45px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(143, 109, 78, 0.2);
+            border: 1px solid var(--brand-color);
+        }
+
+        #printlu-banner-root .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(143, 109, 78, 0.3);
+            background-color: transparent;
+            color: var(--brand-color);
+        }
+
+        /* Teksty */
+        #printlu-banner-root .main-heading {
+            color: var(--brand-color);
+            line-height: 1.1;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            #printlu-banner-root .main-heading {
+                font-size: 3.5rem;
+            }
+        }
+
+        #printlu-banner-root .description-text {
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+            margin: 0 0 30px 0;
+            /* Tekst małymi literami */
+            text-transform: lowercase;
+        }
+
+        #printlu-banner-root .description-text::first-letter {
+            text-transform: uppercase;
+        }
+
+        #printlu-banner-root .content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+    </style>
+
+    <!-- Import czcionki Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <section class="full-banner">
+        <!-- Treść baneru -->
+        <div class="content-wrapper reveal">
+            <h1 class="main-heading">
+                Zamów druk 3D
+            </h1>
+            
+            <p class="description-text">
+                Masz gotowy model? Wydrukujemy go dla Ciebie. Masz tylko pomysł? Zaprojektujemy go od podstaw i nadamy mu fizyczną formę.
+            </p>
+
+            <div>
+                <a href="https://printlu.pl/Kontakt.html" class="contact-button">
+                    Skontaktuj się z nami
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- End Komponentu Baner Printlu Full Width -->
 
 <!-- 
   INSTRUKCJA DLA PRINTLU:
@@ -1585,6 +1694,7 @@
 </body>
 
 </html>
+
 
 
 
