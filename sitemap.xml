@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<urlset xmlns="[http://www.sitemaps.org/schemas/sitemap/0.9]">
+<urlset xmlns="[podejrzany link usunięto]">
 
-<!-- TWOJA STRONA GŁÓWNA -->
+<!-- STRONA GŁÓWNA -->
 
 <url>
 <loc>https://printlu.pl</loc>
-<lastmod>2024-05-20</lastmod>
+<lastmod>2026-01-04</lastmod>
 <priority>1.0</priority>
 </url>
 
-<!-- PODSTRONA KONTAKT -->
+<!-- KONTAKT -->
 
 <url>
-<loc>https://printlu.pl/Kontakt</loc>
-<lastmod>2024-05-20</lastmod>
+<loc>https://www.google.com/search?q=https://printlu.pl/Kontakt</loc>
+<lastmod>2026-01-04</lastmod>
 <priority>0.8</priority>
 </url>
 
-<!-- PODSTRONA GALERIA -->
+<!-- GALERIA -->
 
 <url>
-<loc>https://printlu.pl/Galeria</loc>
-<lastmod>2024-05-20</lastmod>
+<loc>https://www.google.com/search?q=https://printlu.pl/Galeria</loc>
+<lastmod>2026-01-04</lastmod>
 <priority>0.8</priority>
 </url>
-
-<!-- DODAJ TUTAJ KOLEJNE PODSTRONY WG TEGO SAMEGO WZORU -->
 
 </urlset>
